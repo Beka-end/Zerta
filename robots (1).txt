@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /privacy.html
+Disallow: /terms.html
+Disallow: /panel/
+
+Sitemap: https://kasip.vercel.app/sitemap.xml

@@ -241,11 +241,11 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
 .legend span{display:flex;align-items:center;gap:9px}
 .badge.soft{background:rgba(228,160,60,.18);color:#8A5C0F}
 
-.tiers.two{grid-template-columns:1fr 1fr}
+.tiers.one{grid-template-columns:minmax(0,420px);justify-content:center}
 .tier.addon{margin-top:16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
 .mob-cta{display:none}
 @media(max-width:900px){
-  .tiers.two{grid-template-columns:1fr}
+  .tiers.one{grid-template-columns:1fr}
   .tier.addon{grid-template-columns:1fr;gap:14px}
   .tier.addon .btn{width:100%;justify-content:center}
 }
@@ -584,21 +584,10 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
 <section class="sec" id="price">
   <div class="wrap reveal">
     <div class="eyebrow" data-ru="Тарифы" data-kz="Тарифтер">Тарифы</div>
-    <h2 data-ru="Одна подписка, без уровней" data-kz="Бір жазылым, деңгейсіз">Одна подписка, без уровней</h2>
-    <div class="tiers two">
-      <div class="tier">
-        <div class="name">Бастау</div>
-        <div class="price">0 ₸ <small data-ru="навсегда" data-kz="мәңгі">навсегда</small></div>
-        <ul>
-          <li>Карточка в каталоге</li>
-          <li>Контакты и часы работы</li>
-          <li>Кнопка WhatsApp</li>
-          <li>Значок «Контакт» после звонка</li>
-        </ul>
-        <a href="#add" class="btn btn-ghost" data-ru="Начать бесплатно" data-kz="Тегін бастау">Начать бесплатно</a>
-      </div>
+    <h2 data-ru="Одна цена, без уровней и звёздочек" data-kz="Бір баға, деңгейсіз">Одна цена, без уровней и звёздочек</h2>
+    <div class="tiers one">
       <div class="tier hot">
-        <div class="name">Подписка</div>
+        <div class="name">Размещение</div>
         <div class="price">4 990 ₸ <small data-ru="/ месяц" data-kz="/ айына">/ месяц</small></div>
         <ul>
           <li>Печать «Проверенный бизнес»</li>
@@ -607,6 +596,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
           <li>Геометка и маршрут в 2GIS</li>
           <li>Версия на казахском</li>
           <li>Отзывы и ответы на них</li>
+          <li>Кнопка WhatsApp для заявок</li>
         </ul>
         <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-sun" data-ru="Оплатить в Kaspi" data-kz="Kaspi арқылы төлеу">Оплатить в Kaspi</a>
       </div>

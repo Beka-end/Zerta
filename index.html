@@ -240,6 +240,58 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
 .legend{display:flex;gap:26px;flex-wrap:wrap;margin:4px 0 22px;font-size:13.5px;color:var(--muted)}
 .legend span{display:flex;align-items:center;gap:9px}
 .badge.soft{background:rgba(228,160,60,.18);color:#8A5C0F}
+
+.tiers.two{grid-template-columns:1fr 1fr}
+.tier.addon{margin-top:16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.mob-cta{display:none}
+@media(max-width:900px){
+  .tiers.two{grid-template-columns:1fr}
+  .tier.addon{grid-template-columns:1fr;gap:14px}
+  .tier.addon .btn{width:100%;justify-content:center}
+}
+@media(max-width:760px){
+  body{font-size:16px}
+  .wrap{width:calc(100% - 32px)}
+  .sec{padding:52px 0}
+  .hero{padding:34px 0 48px;gap:34px}
+  .hero-sub{font-size:17px;max-width:none}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .hero-stats{gap:14px;flex-wrap:wrap;margin-top:34px}
+  .stat{flex:1 1 30%}
+  .stat b{font-size:20px}
+  .stat span{font-size:12px}
+  .card-demo{padding:24px 22px 22px}
+  .nav-in{gap:12px;height:58px}
+  .logo{font-size:17px}
+  .mob-cta{display:inline-flex;margin-left:auto;padding:9px 16px;font-size:14px}
+  .lang button{padding:6px 9px}
+  .filters{gap:7px;margin:22px 0 18px}
+  .chip{font-size:13.5px;padding:8px 13px}
+  .city{margin-left:0;width:100%;font-size:14px}
+  .legend{gap:10px;flex-direction:column;font-size:13px}
+  .reason{padding:22px 20px}
+  .step{padding:14px 16px}
+  .final{padding:38px 22px;border-radius:20px}
+  .final h2{max-width:none}
+  .mapbox iframe{height:190px}
+
+  /* таблица сравнения становится списком карточек */
+  .cmp thead{display:none}
+  .cmp,.cmp tbody,.cmp tr,.cmp td{display:block;width:100%}
+  .cmp tr{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:6px 14px 10px;margin-bottom:12px}
+  .cmp td{border:0;padding:7px 0;display:flex;justify-content:space-between;gap:14px;text-align:right;font-size:14.5px}
+  .cmp td:first-child{display:block;text-align:left;font-weight:500;color:var(--sun);
+    padding:10px 0 8px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:4px;font-size:15.5px}
+  .cmp td:first-child::before{content:none}
+  .cmp td::before{content:attr(data-l);color:#8FA8A4;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.08em;text-transform:uppercase;text-align:left;flex:0 0 auto;padding-top:3px}
+  .cmp .us{background:transparent;color:var(--sun)}
+}
+@media(max-width:400px){
+  h1{font-size:30px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
 .reveal.in{opacity:1;transform:none}
 
@@ -271,6 +323,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
       <a href="#add" data-ru="Разместить" data-kz="Орналастыру">Разместить</a>
       <a href="https://wecreate-one.vercel.app/" target="_blank" rel="noopener" style="color:var(--jade);font-weight:600">WeCreate ↗</a>
     </div>
+    <a class="btn btn-main mob-cta" href="#add">Разместить</a>
     <div class="lang">
       <button class="on" data-lang="ru">RU</button>
       <button data-lang="kz">ҚАЗ</button>
@@ -479,12 +532,12 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
     <table class="cmp">
       <thead><tr><th></th><th>Instagram</th><th>2GIS</th><th class="us">KÁSIP</th></tr></thead>
       <tbody>
-        <tr><td>Находят через Google</td><td class="no">Нет, посты не индексируются</td><td class="no">Только карточка</td><td class="us">Своя страница + SEO-текст</td></tr>
-        <tr><td>Проверка компании</td><td class="no">Нет</td><td class="no">Частично</td><td class="us">ИИН или БИН в госреестре</td></tr>
-        <tr><td>Приём оплаты</td><td class="no">Переводом «на карту»</td><td class="no">Нет</td><td class="us">Kaspi QR прямо в карточке</td></tr>
-        <tr><td>Свой сайт</td><td class="no">Только ссылка в профиле</td><td class="no">Нет</td><td class="us">WeCreate — 2 500 ₸ разово</td></tr>
-        <tr><td>Казахская версия</td><td class="no">Пишете вручную</td><td class="no">Только название</td><td class="us">Карточка на двух языках</td></tr>
-        <tr><td>Цена входа</td><td class="no">Реклама от 30 000 ₸/мес</td><td class="no">Договор, от 60 000 ₸</td><td class="us">4 990 ₸/мес, отмена в 1 клик</td></tr>
+        <tr><td data-l="Находят через Google">Находят через Google</td><td class="no" data-l="Instagram">Нет, посты не индексируются</td><td class="no" data-l="2GIS">Только карточка</td><td class="us" data-l="KÁSIP">Своя страница + SEO-текст</td></tr>
+        <tr><td data-l="Проверка компании">Проверка компании</td><td class="no" data-l="Instagram">Нет</td><td class="no" data-l="2GIS">Частично</td><td class="us" data-l="KÁSIP">ИИН или БИН в госреестре</td></tr>
+        <tr><td data-l="Приём оплаты">Приём оплаты</td><td class="no" data-l="Instagram">Переводом «на карту»</td><td class="no" data-l="2GIS">Нет</td><td class="us" data-l="KÁSIP">Kaspi QR прямо в карточке</td></tr>
+        <tr><td data-l="Свой сайт">Свой сайт</td><td class="no" data-l="Instagram">Только ссылка в профиле</td><td class="no" data-l="2GIS">Нет</td><td class="us" data-l="KÁSIP">WeCreate — 2 500 ₸ разово</td></tr>
+        <tr><td data-l="Казахская версия">Казахская версия</td><td class="no" data-l="Instagram">Пишете вручную</td><td class="no" data-l="2GIS">Только название</td><td class="us" data-l="KÁSIP">Карточка на двух языках</td></tr>
+        <tr><td data-l="Цена входа">Цена входа</td><td class="no" data-l="Instagram">Реклама от 30 000 ₸/мес</td><td class="no" data-l="2GIS">Договор, от 60 000 ₸</td><td class="us" data-l="KÁSIP">4 990 ₸/мес, отмена в 1 клик</td></tr>
       </tbody>
     </table>
   </div>
@@ -532,7 +585,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
   <div class="wrap reveal">
     <div class="eyebrow" data-ru="Тарифы" data-kz="Тарифтер">Тарифы</div>
     <h2 data-ru="Одна подписка, без уровней" data-kz="Бір жазылым, деңгейсіз">Одна подписка, без уровней</h2>
-    <div class="tiers" style="grid-template-columns:1fr 1fr">
+    <div class="tiers two">
       <div class="tier">
         <div class="name">Бастау</div>
         <div class="price">0 ₸ <small data-ru="навсегда" data-kz="мәңгі">навсегда</small></div>
@@ -558,7 +611,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(
         <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-sun" data-ru="Оплатить в Kaspi" data-kz="Kaspi арқылы төлеу">Оплатить в Kaspi</a>
       </div>
     </div>
-    <div class="tier" style="margin-top:16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px">
+    <div class="tier addon">
       <div>
         <div class="name">Сайт — отдельно</div>
         <p style="margin:8px 0 0;color:var(--muted);font-size:15px">Нужен свой сайт? Соберите его в WeCreate за 20 секунд. Разовая оплата 2 500 ₸, подписка для этого не нужна.</p>

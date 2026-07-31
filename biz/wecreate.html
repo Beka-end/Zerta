@@ -92,6 +92,34 @@ footer{border-top:1px solid var(--line);padding:28px 0 44px;font-size:13.5px;col
   display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 footer a{color:var(--muted)}
 .disclaimer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;margin-top:20px}
+
+@media(max-width:760px){
+  body{font-size:16px}
+  .wrap{width:calc(100% - 32px)}
+  .nav-in{gap:12px;height:58px}
+  .logo{font-size:17px}
+  .nav .btn{padding:9px 16px;font-size:14px}
+  .crumbs{font-size:11px;padding-top:16px}
+  .head{padding:20px 0 26px}
+  .lede{font-size:17px;max-width:none;margin-top:14px}
+  .badges{gap:6px;margin-bottom:13px}
+  .badge{font-size:10px;padding:5px 9px}
+  .cols{padding:28px 0 40px;gap:26px}
+  .block{margin-bottom:30px}
+  h2{font-size:19px}
+  .prices .row{padding:13px 15px;font-size:15px;gap:12px}
+  .side{gap:12px}
+  .panel{padding:19px}
+  .step{gap:12px}
+  .mapbox iframe{height:180px}
+  .disclaimer{font-size:12.5px}
+  footer{padding:24px 0 36px;font-size:13px}
+}
+@media(max-width:400px){
+  h1{font-size:29px}
+  .prices .row{flex-direction:column;gap:3px}
+  .prices b{align-self:flex-start}
+}
 @media(max-width:880px){
   .cols{grid-template-columns:1fr;gap:30px;padding-bottom:50px}
   .side{position:static}

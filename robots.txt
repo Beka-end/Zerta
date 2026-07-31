@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /privacy.html
 Disallow: /terms.html
+Disallow: /panel/
 
-Sitemap: https://kasip.kz/sitemap.xml
+Sitemap: https://kasip.vercel.app/sitemap.xml

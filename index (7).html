@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="VAQPQ68Nu2AA2sftxIQOK54ACpTVan5SMRl_qvHvtkY" />
+<title>KÁSIP.kz — каталог бизнесов Казахстана</title>
+<meta name="description" content="KÁSIP (Kasip, Касип) — каталог бизнесов Казахстана с проверкой в госреестре. Карточка, страница в поиске Google, заявки в WhatsApp и оплата Kaspi. От 4 990 ₸ в месяц, без процентов с продаж.">
+<link rel="canonical" href="https://kasip.vercel.app/">
+<meta property="og:title" content="KÁSIP.kz — каталог бизнесов Казахстана">
+<meta property="og:description" content="Клиент ищет вас в Google, а находит конкурента. Карточка с проверкой в госреестре, заявки в WhatsApp, оплата Kaspi.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kasip.vercel.app/">
+<meta name="theme-color" content="#E9EEEA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EEEA;
+  --paper-2:#F5F8F5;
+  --ink:#0D1B1E;
+  --ink-2:#14343A;
+  --jade:#0F7A6B;
+  --jade-deep:#07403A;
+  --sun:#E4A03C;
+  --line:#C3CFC8;
+  --muted:#5C6F6B;
+  --display:'Unbounded','Golos Text',system-ui,sans-serif;
+  --body:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.sec{padding:92px 0}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(34px,5.2vw,62px)}
+h2{font-size:clamp(27px,3.6vw,44px)}
+h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--jade);display:flex;align-items:center;gap:10px;margin-bottom:18px
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--jade);opacity:.5}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;
+  font-family:var(--body);font-weight:600;font-size:16px;
+  padding:14px 24px;border-radius:100px;text-decoration:none;transition:.2s ease;
+}
+.btn-main{background:var(--jade);color:#fff}
+.btn-main:hover{background:var(--jade-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(0,0,0,.03)}
+.btn-sun{background:var(--sun);color:#2A1B04}
+.btn-sun:hover{filter:brightness(1.06);transform:translateY(-2px)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(233,238,234,.86);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
+}
+.nav-in{display:flex;align-items:center;gap:26px;height:66px}
+.logo{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.03em;text-decoration:none}
+.logo span{color:var(--jade)}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--muted);transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:100px;overflow:hidden;font-family:var(--mono);font-size:12px}
+.lang button{background:none;border:0;padding:7px 12px;cursor:pointer;color:var(--muted);font-family:inherit;font-size:inherit}
+.lang button.on{background:var(--ink);color:var(--paper)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:74px 0 88px}
+.hero-sub{font-size:19px;color:var(--muted);margin-top:24px;max-width:35ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.hero-stats{display:flex;gap:34px;margin-top:46px;padding-top:26px;border-top:1px solid var(--line)}
+.stat b{display:block;font-family:var(--mono);font-size:24px;font-weight:600}
+.stat span{font-size:13px;color:var(--muted)}
+.fade{opacity:0;transform:translateY(16px);animation:up .7s cubic-bezier(.2,.7,.3,1) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.27s}.d4{animation-delay:.38s}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* signature: verified card + seal */
+.card-demo{
+  position:relative;background:var(--ink);color:var(--paper-2);border-radius:22px;
+  padding:30px 30px 26px;box-shadow:0 28px 60px -28px rgba(13,27,30,.55)
+}
+.card-demo .row{display:flex;align-items:center;gap:14px}
+.avatar{width:52px;height:52px;border-radius:13px;background:linear-gradient(140deg,var(--jade),#1BB79E);flex:0 0 auto}
+.card-demo h4{margin:0;font-family:var(--display);font-size:18px;font-weight:600}
+.card-demo .meta{font-family:var(--mono);font-size:12px;color:#8FA8A4;margin-top:3px}
+.bin{
+  margin-top:22px;padding:12px 14px;border:1px dashed rgba(255,255,255,.22);border-radius:10px;
+  font-family:var(--mono);font-size:12.5px;color:#B9CDC9;display:flex;justify-content:space-between;gap:10px
+}
+.bin b{color:var(--sun);font-weight:600}
+.card-actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.chip-sm{font-size:12.5px;padding:7px 13px;border-radius:100px;background:rgba(255,255,255,.09);font-family:var(--mono)}
+.seal{position:absolute;right:-26px;bottom:-26px;width:132px;height:132px}
+.seal-ring{animation:spin 26s linear infinite;transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.seal-core{
+  position:absolute;inset:30px;border-radius:50%;background:var(--sun);
+  display:grid;place-items:center;box-shadow:0 8px 22px -8px rgba(0,0,0,.5)
+}
+.seal-core svg{width:34px;height:34px}
+
+/* ---------- catalog ---------- */
+.filters{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:30px 0 26px}
+.chip{
+  font-size:14.5px;padding:9px 17px;border-radius:100px;border:1px solid var(--line);
+  background:transparent;cursor:pointer;font-family:var(--body);transition:.15s
+}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.city{margin-left:auto;font-family:var(--body);font-size:14.5px;padding:9px 14px;border-radius:100px;border:1px solid var(--line);background:var(--paper-2)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.biz{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  transition:.2s ease;display:flex;flex-direction:column;gap:10px;
+  text-decoration:none;color:inherit
+}
+.biz{position:relative}
+.biz h3 a.stretch{text-decoration:none;color:inherit}
+.biz h3 a.stretch::after{content:"";position:absolute;inset:0;z-index:0}
+.biz .tags a{position:relative;z-index:1}
+.tag.link{border-color:var(--jade);color:var(--jade);text-decoration:none;font-weight:600}
+.tag.link:hover{background:var(--jade);color:#fff}
+.biz.free{background:transparent;border-style:dashed}
+.biz.free h3{color:var(--muted)}
+.biz.free:hover{border-style:solid}
+.biz:hover{transform:translateY(-4px);border-color:var(--jade);box-shadow:0 16px 34px -22px rgba(13,27,30,.5)}
+.biz .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.biz h3{font-family:var(--body);font-weight:600;font-size:17px}
+.badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:4px 8px;border-radius:6px;
+  background:rgba(15,122,107,.12);color:var(--jade);white-space:nowrap
+}
+.biz .desc{font-size:14.5px;color:var(--muted);line-height:1.45}
+.biz .foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.empty{grid-column:1/-1;padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* ---------- compare ---------- */
+.dark{background:var(--ink);color:var(--paper-2)}
+.dark .eyebrow{color:var(--sun)}
+.dark .eyebrow::before{background:var(--sun)}
+.cmp{width:100%;border-collapse:collapse;margin-top:36px;font-size:15.5px}
+.cmp th,.cmp td{padding:16px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.11)}
+.cmp th{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#8FA8A4;font-weight:400}
+.cmp th:first-child{width:34%}
+.cmp .us{background:rgba(228,160,60,.09);color:#fff;font-weight:500}
+.cmp thead .us{color:var(--sun)}
+.cmp td:first-child{color:#B9CDC9}
+.no{color:#7E9490}
+
+/* ---------- reasons ---------- */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:38px}
+.reason{background:var(--paper);padding:28px 24px}
+.reason .n{font-family:var(--mono);font-size:12px;color:var(--jade);margin-bottom:14px}
+.reason p{font-size:15px;color:var(--muted);margin-top:9px}
+
+/* ---------- шаги ---------- */
+.we{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.flow{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:17px 19px}
+.step i{font-family:var(--mono);font-style:normal;font-size:12px;color:#fff;background:var(--jade);width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:0 0 auto;margin-top:2px}
+.step b{font-weight:600;font-size:15.5px}
+.step span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+
+/* ---------- pricing ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;align-items:start}
+.tier{background:var(--paper-2);border:1px solid var(--line);border-radius:18px;padding:28px 26px;display:flex;flex-direction:column;gap:6px}
+.tier.hot{background:var(--ink);color:var(--paper-2);border-color:var(--ink);box-shadow:0 26px 54px -30px rgba(13,27,30,.7);position:relative}
+.ribbon{position:absolute;top:-11px;right:22px;background:var(--sun);color:#2A1B04;font-family:var(--mono);
+  font-size:11px;letter-spacing:.06em;padding:5px 12px;border-radius:100px;font-weight:600;white-space:nowrap}
+.tier-note{font-size:14px;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.paytip{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:var(--muted);
+  text-align:center;margin-bottom:9px}
+.tier.hot .paytip{color:var(--sun)}
+.tier.hot .tier-note{color:#9FC4BC}
+.tier .name{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--jade)}
+.tier.hot .name{color:var(--sun)}
+.price{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-.03em;margin:10px 0 2px}
+.price small{font-family:var(--body);font-size:14px;font-weight:400;color:var(--muted)}
+.tier.hot .price small{color:#8FA8A4}
+.tier ul{list-style:none;padding:0;margin:18px 0 24px;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.tier li{padding-left:22px;position:relative;color:var(--muted)}
+.tier.hot li{color:#C6D6D2}
+.tier li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:50%;border:2px solid var(--jade)}
+.tier.hot li::before{border-color:var(--sun)}
+.tier .btn{margin-top:auto;justify-content:center}
+.kaspi-note{margin-top:22px;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center}
+.kaspi-note b{font-family:var(--mono);font-size:12px;background:#F14635;color:#fff;padding:4px 9px;border-radius:6px;font-weight:600}
+
+/* ---------- cta ---------- */
+.final{background:var(--jade-deep);color:#EAF4F1;border-radius:26px;padding:64px 52px;text-align:center;margin:0 0 92px}
+.final h2{max-width:16ch;margin:0 auto}
+.final p{color:#9FC4BC;margin-top:18px;max-width:52ch;margin-left:auto;margin-right:auto}
+footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+
+/* ---------- теги и гео в карточке ---------- */
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:12px;padding:4px 10px;border-radius:100px;border:1px solid var(--line);color:var(--muted)}
+.tag.online{background:rgba(15,122,107,.1);border-color:transparent;color:var(--jade)}
+.tag.offline{background:rgba(228,160,60,.16);border-color:transparent;color:#8A5C0F}
+.geo{display:flex;align-items:center;gap:6px}
+
+/* ---------- форма размещения ---------- */
+.form-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;margin-top:38px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{
+  font-family:var(--body);font-size:15.5px;padding:12px 14px;border:1px solid var(--line);
+  border-radius:11px;background:var(--paper-2);color:var(--ink);width:100%
+}
+.field textarea{resize:vertical;min-height:88px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--jade);outline:none}
+.hint{font-size:12.5px;color:var(--muted)}
+.hint a{color:var(--jade)}
+.mapbox{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper-2)}
+.mapbox iframe{display:block;width:100%;height:230px;border:0;filter:saturate(.8)}
+.mapbox .cap{padding:14px 16px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.mapbox .cap a{color:var(--jade);text-decoration:none;font-weight:600}
+.paybox{background:var(--ink);color:var(--paper-2);border-radius:var(--r);padding:24px;margin-top:18px}
+.paybox h3{font-family:var(--display);font-size:17px;margin-bottom:14px}
+.paybox ol{margin:0;padding-left:20px;font-size:14.5px;color:#B9CDC9;display:flex;flex-direction:column;gap:8px}
+.paybox .btn{margin-top:18px;width:100%;justify-content:center}
+.term{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:#8FA8A4;text-align:center}
+.ok{display:none;background:rgba(15,122,107,.1);border:1px solid var(--jade);border-radius:var(--r);padding:18px;margin-top:16px;font-size:15px;grid-column:1/-1}
+.ok.show{display:block}
+
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--muted);cursor:pointer;
+  background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.consent input{width:18px;height:18px;flex:0 0 auto;margin-top:1px;accent-color:var(--jade)}
+.consent.err{border-color:#C0452F}
+.legend{display:flex;gap:26px;flex-wrap:wrap;margin:4px 0 22px;font-size:13.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:9px}
+.badge.soft{background:rgba(228,160,60,.18);color:#8A5C0F}
+
+.tiers.one{grid-template-columns:minmax(0,420px);justify-content:center}
+.tier.addon{margin-top:16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.mob-cta{display:none}
+@media(max-width:900px){
+  .tiers.one{grid-template-columns:1fr}
+  .tier.addon{grid-template-columns:1fr;gap:14px}
+  .tier.addon .btn{width:100%;justify-content:center}
+}
+@media(max-width:760px){
+  body{font-size:16px}
+  .wrap{width:calc(100% - 32px)}
+  .sec{padding:52px 0}
+  .hero{padding:34px 0 48px;gap:34px}
+  .hero-sub{font-size:17px;max-width:none}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .hero-stats{gap:14px;flex-wrap:wrap;margin-top:34px}
+  .stat{flex:1 1 30%}
+  .stat b{font-size:20px}
+  .stat span{font-size:12px}
+  .card-demo{padding:24px 22px 22px}
+  .nav-in{gap:12px;height:58px}
+  .logo{font-size:17px}
+  .mob-cta{display:inline-flex;margin-left:auto;padding:9px 16px;font-size:14px}
+  .lang button{padding:6px 9px}
+  .filters{gap:7px;margin:22px 0 18px}
+  .chip{font-size:13.5px;padding:8px 13px}
+  .city{margin-left:0;width:100%;font-size:14px}
+  .legend{gap:10px;flex-direction:column;font-size:13px}
+  .reason{padding:22px 20px}
+  .step{padding:14px 16px}
+  .final{padding:38px 22px;border-radius:20px}
+  .final h2{max-width:none}
+  .mapbox iframe{height:190px}
+
+  /* таблица сравнения становится списком карточек */
+  .cmp thead{display:none}
+  .cmp,.cmp tbody,.cmp tr,.cmp td{display:block;width:100%}
+  .cmp tr{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:6px 14px 10px;margin-bottom:12px}
+  .cmp td{border:0;padding:7px 0;display:flex;justify-content:space-between;gap:14px;text-align:right;font-size:14.5px}
+  .cmp td:first-child{display:block;text-align:left;font-weight:500;color:var(--sun);
+    padding:10px 0 8px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:4px;font-size:15.5px}
+  .cmp td:first-child::before{content:none}
+  .cmp td::before{content:attr(data-l);color:#8FA8A4;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.08em;text-transform:uppercase;text-align:left;flex:0 0 auto;padding-top:3px}
+  .cmp .us{background:transparent;color:var(--sun)}
+}
+@media(max-width:400px){
+  h1{font-size:30px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero,.we{grid-template-columns:1fr;gap:40px}
+  .grid,.reasons,.tiers{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .sec{padding:64px 0}
+  .final{padding:48px 26px}
+  .seal{width:104px;height:104px;right:-12px;bottom:-18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .fade,.reveal{opacity:1;transform:none}
+}
+:focus-visible{outline:2.5px solid var(--jade);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="logo">KÁSIP<span>.kz</span></a>
+    <div class="nav-links">
+      <a href="#catalog" data-ru="Каталог" data-kz="Каталог">Каталог</a>
+      <a href="#why" data-ru="Почему мы" data-kz="Неге біз">Почему мы</a>
+      <a href="#price" data-ru="Тарифы" data-kz="Тарифтер">Тарифы</a>
+      <a href="#add" data-ru="Разместить" data-kz="Орналастыру">Разместить</a>
+    </div>
+    <a class="btn btn-main mob-cta" href="#add">Разместить</a>
+    <div class="lang">
+      <button class="on" data-lang="ru">RU</button>
+      <button data-lang="kz">ҚАЗ</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <div>
+    <div class="eyebrow fade d1" data-ru="Реестр бизнесов Казахстана" data-kz="Қазақстан бизнес тізілімі">Реестр бизнесов Казахстана</div>
+    <h1 class="fade d2" data-ru="Клиент ищет вас в Google. А находит конкурента." data-kz="Клиент сізді Google-ден іздейді. Ал бәсекелесті табады.">Клиент ищет вас в Google. А находит конкурента.</h1>
+    <p class="hero-sub fade d3" data-ru="Карточка бизнеса с проверкой в госреестре, отдельная страница в поиске Google и заявки прямо в WhatsApp. Оплата с карты Kaspi, без автосписаний." data-kz="БСН бойынша тексерілген бизнес картасы, іздеуде жеке бет, WhatsApp пен Kaspi арқылы тапсырыс. Жазылым — Kaspi картасынан.">Карточка бизнеса с проверкой в госреестре, отдельная страница в поиске Google и заявки прямо в WhatsApp. Оплата с карты Kaspi, без автосписаний.</p>
+    <div class="hero-cta fade d4">
+      <a href="#add" class="btn btn-main" data-ru="Разместить бизнес" data-kz="Бизнесті орналастыру">Разместить бизнес</a>
+      <a href="#catalog" class="btn btn-ghost" data-ru="Смотреть каталог" data-kz="Каталогты көру">Смотреть каталог</a>
+    </div>
+    <div class="hero-stats fade d4">
+      <div class="stat"><b>4 990 ₸</b><span data-ru="в месяц, без комиссий" data-kz="айына, комиссиясыз">в месяц, без комиссий</span></div>
+      <div class="stat"><b>30 дней</b><span data-ru="без автосписаний" data-kz="автошегерусіз">без автосписаний</span></div>
+      <div class="stat"><b>0 %</b><span data-ru="с ваших продаж" data-kz="сатылымыңыздан">с ваших продаж</span></div>
+    </div>
+  </div>
+
+  <div class="card-demo fade d3">
+    <div class="row">
+      <div class="avatar"></div>
+      <div>
+        <h4>Название вашего бизнеса</h4>
+        <div class="meta">Категория · Город · так выглядит карточка</div>
+      </div>
+    </div>
+    <div class="bin">
+      <span data-ru="Бизнес найден в госреестре" data-kz="Бизнес мемлекеттік тізілімде табылды">Бизнес найден в госреестре</span>
+      <b>✓</b>
+    </div>
+    <div class="card-actions">
+      <span class="chip-sm">WhatsApp</span>
+      <span class="chip-sm">Цены</span>
+      <span class="chip-sm">Геометка</span>
+      <span class="chip-sm">В поиске Google</span>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 132 132" class="seal-ring">
+        <defs><path id="ring" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
+        <text font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="2.4" fill="#0D1B1E">
+          <textPath href="#ring">ТЕКСЕРІЛГЕН БИЗНЕС · ПРОВЕРЕННЫЙ БИЗНЕС · </textPath>
+        </text>
+      </svg>
+      <div class="seal-core">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A1B04" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CATALOG -->
+<section class="sec" id="catalog" style="padding-top:20px">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Каталог открылся" data-kz="Каталог ашылды">Каталог открылся</div>
+    <h2 data-ru="Купить онлайн или доехать по адресу" data-kz="Онлайн сатып алу немесе мекенжайға бару">Купить онлайн или доехать по адресу</h2>
+    <p style="color:var(--muted);margin-top:16px;max-width:58ch">Каждая карточка показывает, как с бизнесом работать: написать и заказать онлайн или приехать в точку. У офлайн-бизнесов есть геометка — маршрут строится в 2GIS или Google Maps в один тап.</p>
+
+    <div class="filters">
+      <button class="chip on" data-cat="all">Все</button>
+      <button class="chip" data-cat="it">Сайты и IT</button>
+      <button class="chip" data-cat="food">Еда и доставка</button>
+      <button class="chip" data-cat="shop">Магазины</button>
+      <button class="chip" data-cat="beauty">Красота</button>
+      <button class="chip" data-cat="health">Здоровье</button>
+      <button class="chip" data-cat="auto">Авто</button>
+      <button class="chip" data-cat="build">Стройка и ремонт</button>
+      <button class="chip" data-cat="edu">Обучение</button>
+      <button class="chip" data-cat="event">Праздники</button>
+      <button class="chip" data-cat="b2b">Оптом и B2B</button>
+      <button class="chip" data-cat="service">Услуги</button>
+    </div>
+    <div class="filters" style="margin-top:0">
+      <button class="chip on" data-mode="all">Любой формат</button>
+      <button class="chip" data-mode="online">Купить онлайн</button>
+      <button class="chip" data-mode="offline">Приехать в точку</button>
+      <select class="city" id="city">
+        <option value="all">Все города</option>
+        <option>Алматы</option><option>Астана</option><option>Шымкент</option>
+        <option>Караганда</option><option>Актобе</option><option>Атырау</option>
+        <option>Тараз</option><option>Павлодар</option><option>Усть-Каменогорск</option>
+        <option>Костанай</option><option>Кызылорда</option><option>Семей</option>
+      </select>
+    </div>
+    <div class="legend">
+      <span><b class="badge">✓ ПРОВЕРЕНО</b> ИИН или БИН найден в государственном реестре</span>
+      <span><b class="badge soft">☎ КОНТАКТ</b> регистрации нет, но телефон подтверждён звонком</span>
+    </div>
+    <div class="grid" id="grid"></div>
+
+    <p style="font-size:13.5px;color:var(--muted);margin-top:20px">KÁSIP.kz — информационный каталог. Мы не продаём товары и услуги размещённых компаний и не являемся стороной сделок между ними и покупателями. Значок подтверждает регистрацию бизнеса, а не качество его работы. Подробности — в <a href="terms.html" style="color:var(--jade)">Правилах размещения</a>.</p>
+    <div class="mapbox" style="margin-top:26px">
+      <iframe title="Карта" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=76.85%2C43.20%2C76.99%2C43.29&amp;layer=mapnik"></iframe>
+      <div class="cap">
+        <span>Так выглядит геометка в карточке офлайн-бизнеса</span>
+        <span><a href="https://2gis.kz/almaty" target="_blank" rel="noopener">Открыть в 2GIS</a> · <a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD BUSINESS -->
+<section class="sec" id="add" style="background:var(--paper-2);border-top:1px solid var(--line)">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Размещение" data-kz="Орналастыру">Размещение</div>
+    <h2 data-ru="Добавить свой бизнес" data-kz="Бизнесіңізді қосу">Добавить свой бизнес</h2>
+    <div class="form-wrap">
+      <div class="form" id="form">
+        <div class="field full">
+          <label>Название бизнеса</label>
+          <input id="f-name" placeholder="Например: Нан &amp; Kofe">
+        </div>
+        <div class="field">
+          <label>ИИН или БИН — если есть</label>
+          <input id="f-bin" inputmode="numeric" maxlength="12" placeholder="12 цифр, можно пропустить">
+          <span class="hint">Нужен только для проверки в госреестре. В карточке не публикуется и не хранится — после проверки удаляем.</span>
+        </div>
+        <div class="field">
+          <label>Город</label>
+          <input id="f-city" placeholder="Алматы">
+        </div>
+        <div class="field">
+          <label>Категория</label>
+          <select id="f-cat">
+            <option>Сайты и IT</option><option>Еда и доставка</option><option>Магазины</option>
+            <option>Красота</option><option>Здоровье</option><option>Авто</option>
+            <option>Стройка и ремонт</option><option>Обучение</option><option>Праздники</option>
+            <option>Оптом и B2B</option><option>Услуги</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Как покупают</label>
+          <select id="f-mode">
+            <option value="online">Только онлайн</option>
+            <option value="offline">Только в точке</option>
+            <option value="both">Онлайн и в точке</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Геолокация: ссылка из 2GIS или Google Maps</label>
+          <input id="f-geo" placeholder="https://2gis.kz/almaty/firm/...">
+          <span class="hint">Найдите свою точку в <a href="https://2gis.kz" target="_blank" rel="noopener">2GIS</a> или <a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a>, нажмите «Поделиться» и вставьте ссылку сюда. Если работаете только онлайн — оставьте пустым.</span>
+        </div>
+        <div class="field">
+          <label>WhatsApp для заявок</label>
+          <input id="f-wa" inputmode="tel" placeholder="+7 700 000 00 00">
+        </div>
+        <div class="field">
+          <label>Сайт или Instagram</label>
+          <input id="f-site" placeholder="instagram.com/...">
+        </div>
+        <div class="field full">
+          <label>Чем занимаетесь</label>
+          <textarea id="f-desc" placeholder="Две строчки: что продаёте, для кого и от какой цены"></textarea>
+        </div>
+        <div class="field full" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
+          <label>Не заполняйте это поле</label>
+          <input id="f-trap" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field full">
+          <label class="consent">
+            <input type="checkbox" id="f-ok">
+            <span>Согласен на обработку ИИН или БИН — только для разовой проверки бизнеса в государственном реестре. Номер не публикуется и удаляется после проверки. См. <a href="privacy.html" target="_blank" rel="noopener">Политику конфиденциальности</a>.</span>
+          </label>
+        </div>
+        <div class="field full">
+          <button class="btn btn-main" id="send" style="justify-content:center;width:100%">Отправить заявку</button>
+        </div>
+        <div class="ok" id="ok">
+          Заявка собрана и открыта в WhatsApp. Осталось оплатить подписку — карточку публикуем в течение рабочего дня после оплаты.
+        </div>
+      </div>
+
+      <div>
+        <div class="mapbox">
+          <div class="cap" style="display:block">
+            <b style="color:var(--ink);font-size:15px">Что происходит после отправки</b>
+          </div>
+        </div>
+        <div class="paybox">
+          <h3>Оплата подписки</h3>
+          <ol>
+            <li>Отправляете заявку — она приходит нам в WhatsApp.</li>
+            <li>Оплачиваете подписку по ссылке Kaspi.</li>
+            <li>Присылаете чек в тот же чат.</li>
+            <li>Публикуем карточку и включаем её на 30 дней.</li>
+          </ol>
+          <span class="paytip">на странице Kaspi введите 49 900 ₸</span>
+        <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-sun">Оплатить в Kaspi</a>
+          <div class="term">ПОДПИСКА 30 ДНЕЙ · НАПОМИНАНИЕ ЗА 3 ДНЯ</div>
+          <a class="wa-link btn btn-ghost" href="#add" style="width:100%;justify-content:center;margin-top:12px;border-color:rgba(255,255,255,.25);color:var(--paper-2)">Написать в WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / COMPARE -->
+<section class="sec dark" id="why">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Честное сравнение" data-kz="Әділ салыстыру">Честное сравнение</div>
+    <h2 data-ru="Где сейчас живёт ваш бизнес" data-kz="Бизнесіңіз қазір қайда тұрады">Где сейчас живёт ваш бизнес</h2>
+    <table class="cmp">
+      <thead><tr><th></th><th>Instagram</th><th>2GIS</th><th class="us">KÁSIP</th></tr></thead>
+      <tbody>
+        <tr><td data-l="Находят через Google">Находят через Google</td><td class="no" data-l="Instagram">Нет, посты не индексируются</td><td class="no" data-l="2GIS">Только карточка</td><td class="us" data-l="KÁSIP">Своя страница + SEO-текст</td></tr>
+        <tr><td data-l="Проверка компании">Проверка компании</td><td class="no" data-l="Instagram">Нет</td><td class="no" data-l="2GIS">Частично</td><td class="us" data-l="KÁSIP">ИИН или БИН в госреестре</td></tr>
+        <tr><td data-l="Заявки">Заявки</td><td class="no" data-l="Instagram">Директ, теряется в переписке</td><td class="no" data-l="2GIS">Только звонок</td><td class="us" data-l="KÁSIP">Кнопка WhatsApp с готовым текстом</td></tr>
+        <tr><td data-l="Цены и услуги">Цены и услуги</td><td class="no" data-l="Instagram">В постах, надо листать</td><td class="no" data-l="2GIS">Обычно нет</td><td class="us" data-l="KÁSIP">Таблица прямо на странице</td></tr>
+        <tr><td data-l="Цена входа">Цена входа</td><td class="no" data-l="Instagram">Реклама от 30 000 ₸/мес</td><td class="no" data-l="2GIS">Договор, от 60 000 ₸</td><td class="us" data-l="KÁSIP">4 990 ₸/мес, без автосписаний</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- REASONS -->
+<section class="sec">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Почему выбирают нас" data-kz="Неге бізді таңдайды">Почему выбирают нас</div>
+    <h2 data-ru="Шесть причин, которые считаются в деньгах" data-kz="Ақшамен есептелетін алты себеп">Шесть причин, которые считаются в деньгах</h2>
+    <div class="reasons">
+      <div class="reason"><div class="n">01</div><h3>Оплата в Kaspi за 20 секунд</h3><p>Без счетов, договоров и бухгалтерии. Оплатили с карты — карточка активна 30 дней. Автосписаний нет: чтобы уйти, достаточно ничего не делать.</p></div>
+      <div class="reason"><div class="n">02</div><h3>Два уровня проверки</h3><p>Есть ИИН или БИН — сверяем с госреестром и ставим печать «Тексерілген». Нет регистрации — подтверждаем телефон. Значок получают все, но означает он разное, и клиент это видит.</p></div>
+      <div class="reason"><div class="n">03</div><h3>Вас находят в Google</h3><p>У карточки свой адрес, заголовок и описание — поисковик её индексирует. Посты в Instagram не индексируются вообще, поэтому клиент, который ищет вашу услугу словами, вас там не найдёт.</p></div>
+      <div class="reason"><div class="n">04</div><h3>Ноль процентов с продаж</h3><p>Маркетплейсы забирают 10–15 % с каждого заказа. Мы берём фиксированную сумму: чем больше продаёте, тем дешевле вам обходимся.</p></div>
+      <div class="reason"><div class="n">05</div><h3>Заявка приходит в WhatsApp</h3><p>Кнопка в карточке открывает чат с уже написанным сообщением. Клиенту не надо заполнять форму и ждать ответа на почту — он пишет вам в один тап.</p></div>
+      <div class="reason"><div class="n">06</div><h3>Каталог, а не свалка объявлений</h3><p>Мы не выгружаем контакты из чужих справочников и соцсетей. Каждая карточка размещена самим владельцем и проверена вручную — поэтому здесь нет мёртвых номеров и закрывшихся фирм.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="price">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Тарифы" data-kz="Тарифтер">Тарифы</div>
+    <h2 data-ru="Один набор возможностей. Разница только в сроке." data-kz="Мүмкіндіктер бірдей. Айырмашылық — мерзімде.">Один набор возможностей. Разница только в сроке.</h2>
+    <div class="tiers two">
+      <div class="tier">
+        <div class="name">Ай сайын · помесячно</div>
+        <div class="price">4 990 ₸ <small data-ru="/ месяц" data-kz="/ айына">/ месяц</small></div>
+        <p class="tier-note">Попробовать без обязательств. Платите, пока вам это выгодно.</p>
+        <ul>
+          <li>Отдельная страница бизнеса в Google</li>
+          <li>Печать «Проверенный бизнес» после сверки с госреестром</li>
+          <li>Карточка в каталоге с фильтрами по городу и категории</li>
+          <li>Услуги и цены отдельной таблицей</li>
+          <li>Геометка и маршрут в 2GIS или Google Maps</li>
+          <li>Кнопка WhatsApp с готовым сообщением</li>
+          <li>Ссылка на ваш сайт или Instagram</li>
+        </ul>
+        <span class="paytip">на странице Kaspi введите 4 990 ₸</span>
+        <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-ghost" data-ru="Оплатить 4 990 ₸" data-kz="4 990 ₸ төлеу">Оплатить 4 990 ₸</a>
+      </div>
+      <div class="tier hot">
+        <span class="ribbon">выгоднее на 16 %</span>
+        <div class="name">Жылдық · на год</div>
+        <div class="price">49 900 ₸ <small data-ru="/ год · 4 158 ₸ в месяц" data-kz="/ жылына">/ год · 4 158 ₸ в месяц</small></div>
+        <p class="tier-note">Два месяца в подарок. Один платёж — и год не думаете об оплате.</p>
+        <ul>
+          <li>Всё из помесячного размещения</li>
+          <li>Два месяца бесплатно: платите за 10, стоите 12</li>
+          <li>Место в категории закреплено на год</li>
+          <li>Правки в карточке в любой момент</li>
+          <li>Никаких ежемесячных напоминаний</li>
+        </ul>
+        <span class="paytip">на странице Kaspi введите 49 900 ₸</span>
+        <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-sun" data-ru="Оплатить 49 900 ₸" data-kz="49 900 ₸ төлеу">Оплатить 49 900 ₸</a>
+      </div>
+    </div>
+    <div class="kaspi-note"><b>Kaspi</b><span data-ru="На странице Kaspi введите сумму вручную: 4 990 ₸ за месяц или 49 900 ₸ за год. Затем пришлите чек в WhatsApp — включим карточку в тот же день. Автосписаний нет: деньги сами не уйдут." data-kz="Kaspi бетінде соманы қолмен енгізіңіз: айына 4 990 ₸ немесе жылына 49 900 ₸. Түбіртекті WhatsApp-қа жіберіңіз. Автоматты шегеру жоқ.">На странице Kaspi введите сумму вручную: 4 990 ₸ за месяц или 49 900 ₸ за год. Затем пришлите чек в WhatsApp — включим карточку в тот же день. Автосписаний нет: деньги сами не уйдут.</span></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="final reveal">
+    <h2 data-ru="Займите место в своей категории" data-kz="Санатыңыздан орын алыңыз">Займите место в своей категории</h2>
+    <p data-ru="Каталог только открылся. Кто зайдёт первым в своей категории — тот и стоит наверху, пока платит подписку." data-kz="Каталог жаңа ашылды. Санатына бірінші кірген бизнес жоғарыда тұрады.">Каталог только открылся. Кто зайдёт первым в своей категории — тот и стоит наверху, пока платит подписку.</p>
+    <a href="#add" class="btn btn-sun" style="margin-top:30px" data-ru="Разместить бизнес" data-kz="Бизнесті орналастыру">Разместить бизнес</a>
+  </div>
+</div>
+
+<div class="wrap"><footer>
+  <span>ИП «Б.А.С.Т.А. PAY GROUP»<br>KÁSIP.kz — реестр бизнесов Казахстана · <a class="wa-link" href="#add" style="color:var(--jade);text-decoration:none;font-weight:600">Написать в WhatsApp</a></span>
+  <span><a href="privacy.html" style="color:var(--muted)">Политика конфиденциальности</a> · <a href="terms.html" style="color:var(--muted)">Правила размещения</a></span>
+  <span>Оплата — Kaspi</span>
+</footer></div>
+
+<script src="data.js"></script>
+<script>
+const KASPI="https://pay.kaspi.kz/pay/cwevqlzj";
+const OWNER_WA=["7708","271","59","54"].join(""); /* номер для заявок, собирается по частям */
+document.querySelectorAll(".wa-link").forEach(a=>{
+  a.href="https://wa.me/"+OWNER_WA;a.target="_blank";a.rel="noopener";
+});
+
+const DATA = (typeof BUSINESSES !== "undefined" && Array.isArray(BUSINESSES)) ? BUSINESSES : null;
+
+const esc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^(https?:\/\/|biz\/)/i.test(u||'')?u:'#';
+const grid=document.getElementById('grid'),city=document.getElementById('city');
+let cat='all',mode='all';
+
+function card(b){
+  const tags=[];
+  if(b.mode==='online'||b.mode==='both') tags.push('<span class="tag online">Купить онлайн</span>');
+  if(b.mode==='offline'||b.mode==='both') tags.push('<span class="tag offline">Есть точка</span>');
+  const geo=b.geo?`<a class="tag" href="${safeUrl(b.geo)}" target="_blank" rel="noopener nofollow">На карте</a>`:'';
+  const site=b.site?`<a class="tag link" href="${safeUrl(b.site)}" target="_blank" rel="noopener nofollow">Перейти на сайт ↗</a>`:'';
+  return `<article class="biz">
+      <div class="top"><h3><a class="stretch" href="${safeUrl(b.url)}">${esc(b.n)}</a></h3>${b.v===1?'<span class="badge">✓ ПРОВЕРЕНО</span>':b.v===2?'<span class="badge soft">☎ КОНТАКТ</span>':''}</div>
+      <p class="desc">${esc(b.d)}</p>
+      <div class="tags">${tags.join('')}${site}${geo}</div>
+      <div class="foot"><span class="geo">${esc(b.city)}</span><span>${esc(b.p)}</span></div>
+    </article>`;
+}
+const free=`<article class="biz free">
+      <div class="top"><h3><a class="stretch" href="#add">Место свободно</a></h3></div>
+      <p class="desc">Первая строка в этой категории и городе. Занимается по подписке, не по знакомству.</p>
+      <div class="tags"><span class="tag">Онлайн</span><span class="tag">Точка на карте</span></div>
+      <div class="foot"><span class="geo">Ваш город</span><span>от 4 990 ₸</span></div>
+    </article>`;
+
+function render(){
+  if(!DATA){
+    grid.innerHTML='<div class="empty">Каталог временно недоступен. Проверьте файл data.js — вероятно, в строке бизнеса пропущена запятая или кавычка.</div>';
+    return;
+  }
+  const today=new Date().toISOString().slice(0,10);
+  const c=city.value;
+  const list=DATA.filter(b=>
+    (b.status!=='off') &&
+    (!b.until || b.until>=today) &&
+    (cat==='all'||b.c===cat)&&
+    (c==='all'||b.city===c)&&
+    (mode==='all'||b.mode===mode||b.mode==='both'));
+  grid.innerHTML=list.map(card).join('')+free+free;
+}
+document.querySelectorAll('.chip[data-cat]').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));
+  ch.classList.add('on');cat=ch.dataset.cat;render();
+}));
+document.querySelectorAll('.chip[data-mode]').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip[data-mode]').forEach(x=>x.classList.remove('on'));
+  ch.classList.add('on');mode=ch.dataset.mode;render();
+}));
+city.addEventListener('change',render);
+render();
+
+/* ---------- форма размещения ---------- */
+const g=id=>document.getElementById(id);
+let lastSent=0;
+g('send').addEventListener('click',()=>{
+  const v=id=>g(id).value.trim();
+  if(v('f-trap')) return;                       /* заполнено только ботом */
+  if(Date.now()-lastSent<20000) return;         /* не чаще раза в 20 секунд */
+  const need=[['f-name','название'],['f-city','город'],['f-wa','WhatsApp']];
+  const miss=need.filter(([id])=>!v(id));
+  if(miss.length){
+    g(miss[0][0]).focus();
+    g(miss[0][0]).style.borderColor='#C0452F';
+    return;
+  }
+  const bin=v('f-bin').replace(/\D/g,'');
+  if(v('f-bin') && bin.length!==12){
+    g('f-bin').style.borderColor='#C0452F';g('f-bin').focus();return;
+  }
+  if(v('f-wa').replace(/\D/g,'').length<10){
+    g('f-wa').style.borderColor='#C0452F';g('f-wa').focus();return;
+  }
+  if(g('f-bin').value.trim() && !g('f-ok').checked){
+    document.querySelector('.consent').classList.add('err');
+    document.querySelector('.consent').scrollIntoView({block:'center',behavior:'smooth'});
+    return;
+  }
+  const modes={online:'Только онлайн',offline:'Только в точке',both:'Онлайн и в точке'};
+  const text=
+`Заявка на размещение в KÁSIP
+Название: ${v('f-name')}
+ИИН/БИН: ${v('f-bin')||'нет регистрации'}
+Город: ${v('f-city')}
+Категория: ${v('f-cat')}
+Формат: ${modes[v('f-mode')]}
+Геолокация: ${v('f-geo')||'нет, только онлайн'}
+WhatsApp: ${v('f-wa')}
+Сайт: ${v('f-site')||'нет'}
+Описание: ${v('f-desc')||'—'}`;
+  lastSent=Date.now();
+  window.open('https://wa.me/'+OWNER_WA+'?text='+encodeURIComponent(text),'_blank');
+  g('ok').classList.add('show');
+});
+document.querySelectorAll('.field input,.field select,.field textarea')
+  .forEach(el=>el.addEventListener('input',()=>el.style.borderColor=''));
+g('f-ok').addEventListener('change',()=>document.querySelector('.consent').classList.remove('err'));
+
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
+  const l=b.dataset.lang;
+  document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('[data-ru]').forEach(el=>{el.textContent=el.dataset[l]||el.dataset.ru;});
+  document.documentElement.lang=l==='kz'?'kk':'ru';
+}));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://kasip.vercel.app/#org",
+      "name": "KÁSIP.kz",
+      "alternateName": ["KASIP", "Касип", "Kasip.kz", "КАСИП"],
+      "url": "https://kasip.vercel.app/",
+      "description": "Каталог бизнесов Казахстана с проверкой регистрации в государственном реестре.",
+      "areaServed": { "@type": "Country", "name": "Казахстан" },
+      "founder": { "@type": "Organization", "name": "ИП Б.А.С.Т.А. PAY GROUP" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kasip.vercel.app/#site",
+      "url": "https://kasip.vercel.app/",
+      "name": "KÁSIP.kz — каталог бизнесов Казахстана",
+      "inLanguage": ["ru", "kk"],
+      "publisher": { "@id": "https://kasip.vercel.app/#org" }
+    }
+  ]
+}
+</script>
+</body>
+</html>

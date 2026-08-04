@@ -1,488 +1,767 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>WeDesign — красивые сайты для бизнеса Казахстана</title>
-<meta name="description" content="Опишите своё дело — получите красивый сайт с услугами, часами работы и кнопкой WhatsApp. Ни один дизайн не повторяется. Оплата через Kaspi.">
-<meta name="theme-color" content="#C7E2F7">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="VAQPQ68Nu2AA2sftxIQOK54ACpTVan5SMRl_qvHvtkY" />
+<title>KÁSIP.kz — каталог бизнесов Казахстана</title>
+<meta name="description" content="KÁSIP (Kasip, Касип) — каталог бизнесов Казахстана с проверкой в госреестре. Карточка, страница в поиске Google, заявки в WhatsApp и оплата Kaspi. От 4 990 ₸ в месяц, без процентов с продаж.">
+<link rel="canonical" href="https://kasip.vercel.app/">
+<meta property="og:title" content="KÁSIP.kz — каталог бизнесов Казахстана">
+<meta property="og:description" content="Клиент ищет вас в Google, а находит конкурента. Карточка с проверкой в госреестре, заявки в WhatsApp, оплата Kaspi.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="WeDesign — красивые сайты для бизнеса Казахстана">
-<meta property="og:description" content="Опишите дело своими словами — получите готовый сайт за минуту.">
+<meta property="og:url" content="https://kasip.vercel.app/">
+<meta name="theme-color" content="#E9EEEA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap&subset=cyrillic,latin">
-<link rel="stylesheet" href="/assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EEEA;
+  --paper-2:#F5F8F5;
+  --ink:#0D1B1E;
+  --ink-2:#14343A;
+  --jade:#0F7A6B;
+  --jade-deep:#07403A;
+  --sun:#E4A03C;
+  --line:#C3CFC8;
+  --muted:#5C6F6B;
+  --display:'Unbounded','Golos Text',system-ui,sans-serif;
+  --body:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:min(1180px,92vw);margin:0 auto}
+.sec{padding:92px 0}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.05;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(34px,5.2vw,62px)}
+h2{font-size:clamp(27px,3.6vw,44px)}
+h3{font-size:19px;font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--jade);display:flex;align-items:center;gap:10px;margin-bottom:18px
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--jade);opacity:.5}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;border:0;cursor:pointer;
+  font-family:var(--body);font-weight:600;font-size:16px;
+  padding:14px 24px;border-radius:100px;text-decoration:none;transition:.2s ease;
+}
+.btn-main{background:var(--jade);color:#fff}
+.btn-main:hover{background:var(--jade-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(0,0,0,.03)}
+.btn-sun{background:var(--sun);color:#2A1B04}
+.btn-sun:hover{filter:brightness(1.06);transform:translateY(-2px)}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(233,238,234,.86);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
+}
+.nav-in{display:flex;align-items:center;gap:26px;height:66px}
+.logo{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.03em;text-decoration:none}
+.logo span{color:var(--jade)}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-size:15px}
+.nav-links a{text-decoration:none;color:var(--muted);transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:100px;overflow:hidden;font-family:var(--mono);font-size:12px}
+.lang button{background:none;border:0;padding:7px 12px;cursor:pointer;color:var(--muted);font-family:inherit;font-size:inherit}
+.lang button.on{background:var(--ink);color:var(--paper)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:74px 0 88px}
+.hero-sub{font-size:19px;color:var(--muted);margin-top:24px;max-width:35ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.hero-stats{display:flex;gap:34px;margin-top:46px;padding-top:26px;border-top:1px solid var(--line)}
+.stat b{display:block;font-family:var(--mono);font-size:24px;font-weight:600}
+.stat span{font-size:13px;color:var(--muted)}
+.fade{opacity:0;transform:translateY(16px);animation:up .7s cubic-bezier(.2,.7,.3,1) forwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.27s}.d4{animation-delay:.38s}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* signature: verified card + seal */
+.card-demo{
+  position:relative;background:var(--ink);color:var(--paper-2);border-radius:22px;
+  padding:30px 30px 26px;box-shadow:0 28px 60px -28px rgba(13,27,30,.55)
+}
+.card-demo .row{display:flex;align-items:center;gap:14px}
+.avatar{width:52px;height:52px;border-radius:13px;background:linear-gradient(140deg,var(--jade),#1BB79E);flex:0 0 auto}
+.card-demo h4{margin:0;font-family:var(--display);font-size:18px;font-weight:600}
+.card-demo .meta{font-family:var(--mono);font-size:12px;color:#8FA8A4;margin-top:3px}
+.bin{
+  margin-top:22px;padding:12px 14px;border:1px dashed rgba(255,255,255,.22);border-radius:10px;
+  font-family:var(--mono);font-size:12.5px;color:#B9CDC9;display:flex;justify-content:space-between;gap:10px
+}
+.bin b{color:var(--sun);font-weight:600}
+.card-actions{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.chip-sm{font-size:12.5px;padding:7px 13px;border-radius:100px;background:rgba(255,255,255,.09);font-family:var(--mono)}
+.seal{position:absolute;right:-26px;bottom:-26px;width:132px;height:132px}
+.seal-ring{animation:spin 26s linear infinite;transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.seal-core{
+  position:absolute;inset:30px;border-radius:50%;background:var(--sun);
+  display:grid;place-items:center;box-shadow:0 8px 22px -8px rgba(0,0,0,.5)
+}
+.seal-core svg{width:34px;height:34px}
+
+/* ---------- catalog ---------- */
+.filters{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:30px 0 26px}
+.chip{
+  font-size:14.5px;padding:9px 17px;border-radius:100px;border:1px solid var(--line);
+  background:transparent;cursor:pointer;font-family:var(--body);transition:.15s
+}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.city{margin-left:auto;font-family:var(--body);font-size:14.5px;padding:9px 14px;border-radius:100px;border:1px solid var(--line);background:var(--paper-2)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.biz{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  transition:.2s ease;display:flex;flex-direction:column;gap:10px;
+  text-decoration:none;color:inherit
+}
+.biz{position:relative}
+.biz h3 a.stretch{text-decoration:none;color:inherit}
+.biz h3 a.stretch::after{content:"";position:absolute;inset:0;z-index:0}
+.biz .tags a{position:relative;z-index:1}
+.tag.link{border-color:var(--jade);color:var(--jade);text-decoration:none;font-weight:600}
+.tag.link:hover{background:var(--jade);color:#fff}
+.biz.free{background:transparent;border-style:dashed}
+.biz.free h3{color:var(--muted)}
+.biz.free:hover{border-style:solid}
+.biz:hover{transform:translateY(-4px);border-color:var(--jade);box-shadow:0 16px 34px -22px rgba(13,27,30,.5)}
+.biz .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.biz h3{font-family:var(--body);font-weight:600;font-size:17px}
+.badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:4px 8px;border-radius:6px;
+  background:rgba(15,122,107,.12);color:var(--jade);white-space:nowrap
+}
+.biz .desc{font-size:14.5px;color:var(--muted);line-height:1.45}
+.biz .foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.empty{grid-column:1/-1;padding:40px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* ---------- compare ---------- */
+.dark{background:var(--ink);color:var(--paper-2)}
+.dark .eyebrow{color:var(--sun)}
+.dark .eyebrow::before{background:var(--sun)}
+.cmp{width:100%;border-collapse:collapse;margin-top:36px;font-size:15.5px}
+.cmp th,.cmp td{padding:16px 14px;text-align:left;border-bottom:1px solid rgba(255,255,255,.11)}
+.cmp th{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#8FA8A4;font-weight:400}
+.cmp th:first-child{width:34%}
+.cmp .us{background:rgba(228,160,60,.09);color:#fff;font-weight:500}
+.cmp thead .us{color:var(--sun)}
+.cmp td:first-child{color:#B9CDC9}
+.no{color:#7E9490}
+
+/* ---------- reasons ---------- */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:38px}
+.reason{background:var(--paper);padding:28px 24px}
+.reason .n{font-family:var(--mono);font-size:12px;color:var(--jade);margin-bottom:14px}
+.reason p{font-size:15px;color:var(--muted);margin-top:9px}
+
+/* ---------- шаги ---------- */
+.we{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.flow{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:17px 19px}
+.step i{font-family:var(--mono);font-style:normal;font-size:12px;color:#fff;background:var(--jade);width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex:0 0 auto;margin-top:2px}
+.step b{font-weight:600;font-size:15.5px}
+.step span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+
+/* ---------- pricing ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;align-items:start}
+.tier{background:var(--paper-2);border:1px solid var(--line);border-radius:18px;padding:28px 26px;display:flex;flex-direction:column;gap:6px}
+.tier.hot{background:var(--ink);color:var(--paper-2);border-color:var(--ink);box-shadow:0 26px 54px -30px rgba(13,27,30,.7);position:relative}
+.ribbon{position:absolute;top:-11px;right:22px;background:var(--sun);color:#2A1B04;font-family:var(--mono);
+  font-size:11px;letter-spacing:.06em;padding:5px 12px;border-radius:100px;font-weight:600;white-space:nowrap}
+.tier-note{font-size:14px;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.paytip{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;color:var(--muted);
+  text-align:center;margin-bottom:9px}
+.tier.hot .paytip{color:var(--sun)}
+.tier.hot .tier-note{color:#9FC4BC}
+.tier .name{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--jade)}
+.tier.hot .name{color:var(--sun)}
+.price{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-.03em;margin:10px 0 2px}
+.price small{font-family:var(--body);font-size:14px;font-weight:400;color:var(--muted)}
+.tier.hot .price small{color:#8FA8A4}
+.tier ul{list-style:none;padding:0;margin:18px 0 24px;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.tier li{padding-left:22px;position:relative;color:var(--muted)}
+.tier.hot li{color:#C6D6D2}
+.tier li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:50%;border:2px solid var(--jade)}
+.tier.hot li::before{border-color:var(--sun)}
+.tier .btn{margin-top:auto;justify-content:center}
+.kaspi-note{margin-top:22px;font-size:14px;color:var(--muted);display:flex;gap:10px;align-items:center}
+.kaspi-note b{font-family:var(--mono);font-size:12px;background:#F14635;color:#fff;padding:4px 9px;border-radius:6px;font-weight:600}
+
+/* ---------- cta ---------- */
+.final{background:var(--jade-deep);color:#EAF4F1;border-radius:26px;padding:64px 52px;text-align:center;margin:0 0 92px}
+.final h2{max-width:16ch;margin:0 auto}
+.final p{color:#9FC4BC;margin-top:18px;max-width:52ch;margin-left:auto;margin-right:auto}
+footer{border-top:1px solid var(--line);padding:34px 0;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+
+/* ---------- теги и гео в карточке ---------- */
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:12px;padding:4px 10px;border-radius:100px;border:1px solid var(--line);color:var(--muted)}
+.tag.online{background:rgba(15,122,107,.1);border-color:transparent;color:var(--jade)}
+.tag.offline{background:rgba(228,160,60,.16);border-color:transparent;color:#8A5C0F}
+.geo{display:flex;align-items:center;gap:6px}
+
+/* ---------- форма размещения ---------- */
+.form-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:start;margin-top:38px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{
+  font-family:var(--body);font-size:15.5px;padding:12px 14px;border:1px solid var(--line);
+  border-radius:11px;background:var(--paper-2);color:var(--ink);width:100%
+}
+.field textarea{resize:vertical;min-height:88px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--jade);outline:none}
+.hint{font-size:12.5px;color:var(--muted)}
+.hint a{color:var(--jade)}
+.mapbox{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper-2)}
+.mapbox iframe{display:block;width:100%;height:230px;border:0;filter:saturate(.8)}
+.mapbox .cap{padding:14px 16px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.mapbox .cap a{color:var(--jade);text-decoration:none;font-weight:600}
+.paybox{background:var(--ink);color:var(--paper-2);border-radius:var(--r);padding:24px;margin-top:18px}
+.paybox h3{font-family:var(--display);font-size:17px;margin-bottom:14px}
+.paybox ol{margin:0;padding-left:20px;font-size:14.5px;color:#B9CDC9;display:flex;flex-direction:column;gap:8px}
+.paybox .btn{margin-top:18px;width:100%;justify-content:center}
+.term{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:#8FA8A4;text-align:center}
+.ok{display:none;background:rgba(15,122,107,.1);border:1px solid var(--jade);border-radius:var(--r);padding:18px;margin-top:16px;font-size:15px;grid-column:1/-1}
+.ok.show{display:block}
+
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:14px;color:var(--muted);cursor:pointer;
+  background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+.consent input{width:18px;height:18px;flex:0 0 auto;margin-top:1px;accent-color:var(--jade)}
+.consent.err{border-color:#C0452F}
+.legend{display:flex;gap:26px;flex-wrap:wrap;margin:4px 0 22px;font-size:13.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:9px}
+.badge.soft{background:rgba(228,160,60,.18);color:#8A5C0F}
+
+.tiers.one{grid-template-columns:minmax(0,420px);justify-content:center}
+.tier.addon{margin-top:16px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.mob-cta{display:none}
+@media(max-width:900px){
+  .tiers.one{grid-template-columns:1fr}
+  .tier.addon{grid-template-columns:1fr;gap:14px}
+  .tier.addon .btn{width:100%;justify-content:center}
+}
+@media(max-width:760px){
+  body{font-size:16px}
+  .wrap{width:calc(100% - 32px)}
+  .sec{padding:52px 0}
+  .hero{padding:34px 0 48px;gap:34px}
+  .hero-sub{font-size:17px;max-width:none}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .hero-stats{gap:14px;flex-wrap:wrap;margin-top:34px}
+  .stat{flex:1 1 30%}
+  .stat b{font-size:20px}
+  .stat span{font-size:12px}
+  .card-demo{padding:24px 22px 22px}
+  .nav-in{gap:12px;height:58px}
+  .logo{font-size:17px}
+  .mob-cta{display:inline-flex;margin-left:auto;padding:9px 16px;font-size:14px}
+  .lang button{padding:6px 9px}
+  .filters{gap:7px;margin:22px 0 18px}
+  .chip{font-size:13.5px;padding:8px 13px}
+  .city{margin-left:0;width:100%;font-size:14px}
+  .legend{gap:10px;flex-direction:column;font-size:13px}
+  .reason{padding:22px 20px}
+  .step{padding:14px 16px}
+  .final{padding:38px 22px;border-radius:20px}
+  .final h2{max-width:none}
+  .mapbox iframe{height:190px}
+
+  /* таблица сравнения становится списком карточек */
+  .cmp thead{display:none}
+  .cmp,.cmp tbody,.cmp tr,.cmp td{display:block;width:100%}
+  .cmp tr{border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:6px 14px 10px;margin-bottom:12px}
+  .cmp td{border:0;padding:7px 0;display:flex;justify-content:space-between;gap:14px;text-align:right;font-size:14.5px}
+  .cmp td:first-child{display:block;text-align:left;font-weight:500;color:var(--sun);
+    padding:10px 0 8px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:4px;font-size:15.5px}
+  .cmp td:first-child::before{content:none}
+  .cmp td::before{content:attr(data-l);color:#8FA8A4;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.08em;text-transform:uppercase;text-align:left;flex:0 0 auto;padding-top:3px}
+  .cmp .us{background:transparent;color:var(--sun)}
+}
+@media(max-width:400px){
+  h1{font-size:30px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero,.we{grid-template-columns:1fr;gap:40px}
+  .grid,.reasons,.tiers{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .sec{padding:64px 0}
+  .final{padding:48px 26px}
+  .seal{width:104px;height:104px;right:-12px;bottom:-18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .fade,.reveal{opacity:1;transform:none}
+}
+:focus-visible{outline:2.5px solid var(--jade);outline-offset:3px;border-radius:4px}
+</style>
 </head>
 <body>
 
-<div class="bar"></div>
-
-<!-- ═════ согласие на входе ═════ -->
-<div class="gate" id="gate" hidden>
-  <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
-    <div class="gate-body" id="gateAsk">
-      <span class="k">Прежде чем начать</span>
-      <h2 id="gateTitle">Условия работы сервиса</h2>
-      <p>WeDesign собирает сайты для бизнеса. Вы выбираете: получить файл и разместить сайт самостоятельно или получить готовую работающую ссылку. Чтобы пользоваться сервисом, примите два документа:</p>
-      <ul class="gate-list">
-        <li><a href="/oferta.html" target="_blank" rel="noopener">Публичную оферту</a> — что входит в услугу, сколько стоит, как оплатить и когда возможен возврат</li>
-        <li><a href="/politika.html" target="_blank" rel="noopener">Политику обработки персональных данных</a> — какие данные собираются, зачем и как их удалить</li>
-      </ul>
-      <label class="gate-check"><input type="checkbox" id="gateBox"><span>Я прочитал оба документа и принимаю их условия</span></label>
-      <div class="notice" id="gateError" hidden></div>
-      <div class="gate-act">
-        <button class="btn" id="gateYes">Принимаю, продолжить</button>
-        <button class="btn o" id="gateNo">Не принимаю</button>
-      </div>
-      <p class="micro" style="margin-top:14px">Мы запомним ваш выбор, чтобы не спрашивать снова.</p>
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="logo">KÁSIP<span>.kz</span></a>
+    <div class="nav-links">
+      <a href="#catalog" data-ru="Каталог" data-kz="Каталог">Каталог</a>
+      <a href="#why" data-ru="Почему мы" data-kz="Неге біз">Почему мы</a>
+      <a href="#price" data-ru="Тарифы" data-kz="Тарифтер">Тарифы</a>
+      <a href="#add" data-ru="Разместить" data-kz="Орналастыру">Разместить</a>
     </div>
-
-    <div class="gate-body" id="gateDone" hidden>
-      <span class="k">Записано</span>
-      <h2>Согласие зафиксировано</h2>
-      <p>Мы записали ваше согласие на своей стороне: время, редакцию документов и номер расписки. Изменить эту запись задним числом нельзя — она защищена подписью.</p>
-      <div class="acc"><span>Номер расписки</span><b class="mono" id="gateId">—</b></div>
-      <p class="micro">Сохраните номер, если хотите: по нему всегда можно проверить, что и когда вы приняли.</p>
-      <div class="gate-act"><button class="btn" id="gateGo">Продолжить</button></div>
-    </div>
-
-    <div class="gate-body" id="gateBye" hidden>
-      <span class="k">Без согласия</span>
-      <h2>Сервис не может работать</h2>
-      <p>Мы собираем и храним ваши данные, чтобы сделать сайт и найти ваш платёж. Без вашего согласия делать это нельзя — поэтому сборка сайтов недоступна.</p>
-      <p>Если передумаете, вернитесь и примите условия. Посмотреть, что мы делаем, можно и без согласия — примеры сайтов открыты.</p>
-      <div class="gate-act">
-        <button class="btn" id="gateBack">Вернуться и принять</button>
-        <a class="btn o" href="/primery/primer-1-barbershop.html" target="_blank" rel="noopener">Посмотреть пример</a>
-      </div>
+    <a class="btn btn-main mob-cta" href="#add">Разместить</a>
+    <div class="lang">
+      <button class="on" data-lang="ru">RU</button>
+      <button data-lang="kz">ҚАЗ</button>
     </div>
   </div>
-</div>
+</nav>
 
-<!-- ═════ первый экран ═════ -->
-<header class="hero">
-  <div class="sky"><i></i><i></i><i></i><i></i></div>
-  <svg class="hills" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 138c210-58 392 24 638 6s430-84 802-30v106H0z" fill="#A8CE8C" opacity=".55"/>
-    <path d="M0 172c250-44 430 16 706 4s470-60 734-16v60H0z" fill="#8CBB72" opacity=".75"/>
-  </svg>
-
-  <nav class="nav"><div class="in">
-    <a class="brand" href="/">WeDesign</a>
-    <div class="links">
-      <a href="#examples">Примеры</a><a href="#how">Как это работает</a><a href="#price">Цена</a>
+<header class="wrap hero">
+  <div>
+    <div class="eyebrow fade d1" data-ru="Реестр бизнесов Казахстана" data-kz="Қазақстан бизнес тізілімі">Реестр бизнесов Казахстана</div>
+    <h1 class="fade d2" data-ru="Клиент ищет вас в Google. А находит конкурента." data-kz="Клиент сізді Google-ден іздейді. Ал бәсекелесті табады.">Клиент ищет вас в Google. А находит конкурента.</h1>
+    <p class="hero-sub fade d3" data-ru="Карточка бизнеса с проверкой в госреестре, отдельная страница в поиске Google и заявки прямо в WhatsApp. Оплата с карты Kaspi, без автосписаний." data-kz="БСН бойынша тексерілген бизнес картасы, іздеуде жеке бет, WhatsApp пен Kaspi арқылы тапсырыс. Жазылым — Kaspi картасынан.">Карточка бизнеса с проверкой в госреестре, отдельная страница в поиске Google и заявки прямо в WhatsApp. Оплата с карты Kaspi, без автосписаний.</p>
+    <div class="hero-cta fade d4">
+      <a href="#add" class="btn btn-main" data-ru="Разместить бизнес" data-kz="Бизнесті орналастыру">Разместить бизнес</a>
+      <a href="#catalog" class="btn btn-ghost" data-ru="Смотреть каталог" data-kz="Каталогты көру">Смотреть каталог</a>
     </div>
-    <div class="nav-right">
-      <a class="txt" href="#check">Мой заказ</a>
-      <a class="btn sm" href="#build">Собрать сайт</a>
-      <button class="burger" aria-label="Меню"><i></i><i></i></button>
+    <div class="hero-stats fade d4">
+      <div class="stat"><b>4 990 ₸</b><span data-ru="в месяц, без комиссий" data-kz="айына, комиссиясыз">в месяц, без комиссий</span></div>
+      <div class="stat"><b>30 дней</b><span data-ru="без автосписаний" data-kz="автошегерусіз">без автосписаний</span></div>
+      <div class="stat"><b>0 %</b><span data-ru="с ваших продаж" data-kz="сатылымыңыздан">с ваших продаж</span></div>
     </div>
-  </div></nav>
-  <div class="menu">
-    <a href="#examples">Примеры</a><a href="#how">Как это работает</a>
-    <a href="#price">Цена</a><a href="#build">Собрать сайт</a><a href="#check">Мой заказ</a>
   </div>
 
-  <div class="w hero-in">
-    <span class="pill"><i></i>Предпросмотр <b>бесплатный</b>, карта не нужна</span>
-    <h1 style="margin:22px auto 18px;max-width:14ch">Красивый сайт для вашего дела</h1>
-    <p class="lead" style="margin:0 auto">Опишите бизнес обычными словами — соберём страницу с услугами, часами работы и кнопкой WhatsApp. Не хотите писать — просто перечислите услуги в форме ниже.</p>
-
-    <div class="prompt">
-      <textarea id="fDescription" maxlength="900" placeholder="Сделайте профессиональный сайт для моего барбершопа на три кресла в Алмалинском районе. Стрижки, бороды, детские. Работаем по записи, мастера с опытом от пяти лет."></textarea>
-      <div class="prompt-row">
-        <div class="prompt-left">
-          <button class="circle" id="btnAddPhotos" title="Добавить фотографии" aria-label="Добавить фотографии">+</button>
-          <button class="ghost-pill" id="btnExample">Показать пример</button>
-        </div>
-        <button class="send" id="btnHero" aria-label="Собрать сайт">→</button>
-      </div>
-      <div class="prompt-foot"><span id="descCount">0</span> / 900 · <span id="descHint">опишите дело или укажите услуги ниже</span></div>
-    </div>
-
-    <div class="notice" id="heroError" hidden></div>
-
-    <div class="ways">
-      <div class="way">
-        <span class="way-tag">Путь первый</span>
-        <b>Описать словами</b>
-        <p>Напишите в поле выше 3–4 предложения. Получите полный сайт: первый экран, услуги, блок «о нас», ваши цифры, порядок работы и вопросы-ответы.</p>
-      </div>
-      <div class="way-or">или</div>
-      <div class="way">
-        <span class="way-tag">Путь второй</span>
-        <b>Просто перечислить услуги</b>
-        <p>Не хотите писать — пропустите поле и заполните услуги в форме ниже. Получите короткий сайт: первый экран, услуги с ценами, часы работы и контакты.</p>
-        <a class="way-link" href="#build">Перейти к форме →</a>
+  <div class="card-demo fade d3">
+    <div class="row">
+      <div class="avatar"></div>
+      <div>
+        <h4>Название вашего бизнеса</h4>
+        <div class="meta">Категория · Город · так выглядит карточка</div>
       </div>
     </div>
-    <div class="sub">Каждый сайт неповторим <span class="dna" id="dnaTicker">DNA-7F3A2C</span></div>
-    <p class="micro" style="margin-top:10px">Продолжая, вы принимаете <a href="/oferta.html" style="color:var(--ac)">оферту</a> и <a href="/politika.html" style="color:var(--ac)">политику данных</a></p>
-
-    <div class="tiles">
-      <a class="tile" href="/primery/primer-1-barbershop.html" target="_blank" rel="noopener">
-        <div class="tile-view"><iframe src="/primery/primer-1-barbershop.html" title="Пример: барбершоп" loading="lazy" scrolling="no"></iframe></div>
-        <span class="tile-lb">Барбершоп</span>
-      </a>
-      <a class="tile" href="/primery/primer-2-kofeynya.html" target="_blank" rel="noopener">
-        <div class="tile-view"><iframe src="/primery/primer-2-kofeynya.html" title="Пример: кофейня" loading="lazy" scrolling="no"></iframe></div>
-        <span class="tile-lb">Кофейня</span>
-      </a>
-      <a class="tile" href="/primery/primer-3-avtoservis.html" target="_blank" rel="noopener">
-        <div class="tile-view"><iframe src="/primery/primer-3-avtoservis.html" title="Пример: автосервис" loading="lazy" scrolling="no"></iframe></div>
-        <span class="tile-lb">Автосервис</span>
-      </a>
-      <a class="tile" href="/primery/primer-4-manikyur.html" target="_blank" rel="noopener">
-        <div class="tile-view"><iframe src="/primery/primer-4-manikyur.html" title="Пример: студия маникюра" loading="lazy" scrolling="no"></iframe></div>
-        <span class="tile-lb">Студия маникюра</span>
-      </a>
+    <div class="bin">
+      <span data-ru="Бизнес найден в госреестре" data-kz="Бизнес мемлекеттік тізілімде табылды">Бизнес найден в госреестре</span>
+      <b>✓</b>
     </div>
-    <div class="tiles-more"><a class="btn o" href="#examples">Смотреть все примеры</a></div>
+    <div class="card-actions">
+      <span class="chip-sm">WhatsApp</span>
+      <span class="chip-sm">Цены</span>
+      <span class="chip-sm">Геометка</span>
+      <span class="chip-sm">В поиске Google</span>
+    </div>
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 132 132" class="seal-ring">
+        <defs><path id="ring" d="M66,66 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
+        <text font-family="JetBrains Mono, monospace" font-size="10.5" letter-spacing="2.4" fill="#0D1B1E">
+          <textPath href="#ring">ТЕКСЕРІЛГЕН БИЗНЕС · ПРОВЕРЕННЫЙ БИЗНЕС · </textPath>
+        </text>
+      </svg>
+      <div class="seal-core">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2A1B04" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- ═════ примеры ═════ -->
-<section class="s" id="examples"><div class="w">
-  <div class="head c rv"><span class="k">Примеры</span><h2>Четыре сайта подряд из одного генератора</h2>
-  <p class="lead">Ничего не подбиралось вручную — так выпала ДНК. Разные палитры, шрифты, первые экраны и порядок блоков.</p></div>
-  <div class="cards">
-    <div class="card rv"><h3>Barber Loft</h3><p>Барбершоп, Алматы. Тёмная палитра, широкий гротеск, услуги карточками.</p><p style="margin-top:12px"><a href="/primery/primer-1-barbershop.html" target="_blank" rel="noopener" style="color:var(--ac);font-weight:700">Открыть →</a></p></div>
-    <div class="card rv" style="--d:60ms"><h3>Мама Кофе</h3><p>Кофейня, Астана. Тёплая бумага, крупный сплит, путь зерна отдельным блоком.</p><p style="margin-top:12px"><a href="/primery/primer-2-kofeynya.html" target="_blank" rel="noopener" style="color:var(--ac);font-weight:700">Открыть →</a></p></div>
-    <div class="card rv" style="--d:120ms"><h3>АвтоТочка</h3><p>Автосервис, Шымкент. Строгий линейный экран, цифры и порядок работ.</p><p style="margin-top:12px"><a href="/primery/primer-3-avtoservis.html" target="_blank" rel="noopener" style="color:var(--ac);font-weight:700">Открыть →</a></p></div>
-    <div class="card rv" style="--d:180ms"><h3>Nail Room</h3><p>Студия маникюра, Алматы. Полноцветный первый экран, запись в один тап.</p><p style="margin-top:12px"><a href="/primery/primer-4-manikyur.html" target="_blank" rel="noopener" style="color:var(--ac);font-weight:700">Открыть →</a></p></div>
-  </div>
-</div></section>
+<!-- CATALOG -->
+<section class="sec" id="catalog" style="padding-top:20px">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Каталог открылся" data-kz="Каталог ашылды">Каталог открылся</div>
+    <h2 data-ru="Купить онлайн или доехать по адресу" data-kz="Онлайн сатып алу немесе мекенжайға бару">Купить онлайн или доехать по адресу</h2>
+    <p style="color:var(--muted);margin-top:16px;max-width:58ch">Каждая карточка показывает, как с бизнесом работать: написать и заказать онлайн или приехать в точку. У офлайн-бизнесов есть геометка — маршрут строится в 2GIS или Google Maps в один тап.</p>
 
-<!-- ═════ как это работает ═════ -->
-<section class="s soft line" id="how"><div class="w">
-  <div class="head c rv"><span class="k">Порядок действий</span><h2>Четыре шага, и сайт ваш</h2></div>
-  <ol class="steps">
-    <li class="rv"><span class="n">1</span><h3>Опишите дело</h3><p>Три-четыре предложения: чем занимаетесь, для кого, чем отличаетесь.</p></li>
-    <li class="rv" style="--d:60ms"><span class="n">2</span><h3>Задайте часы</h3><p>По дням недели, с выходными и живой меткой «сейчас открыто».</p></li>
-    <li class="rv" style="--d:120ms"><span class="n">3</span><h3>Посмотрите</h3><p>Сайт откроется тут же, с водяным знаком. Не понравился — соберите другой.</p></li>
-    <li class="rv" style="--d:180ms"><span class="n">4</span><h3>Выберите тариф</h3><p>Разместим сайт за вас или отдадим файл, чтобы вы сделали это сами. Оплата разовая, через Kaspi.</p></li>
-  </ol>
-</div></section>
-
-<!-- ═════ что внутри ═════ -->
-<section class="s line"><div class="w">
-  <div class="head c rv"><span class="k">Состав</span><h2>Что входит в каждый сайт</h2>
-  <p class="lead">Ничего лишнего и ничего выдуманного: только то, что вы написали сами.</p></div>
-  <div class="cards">
-    <div class="card rv"><div class="ico"></div><h3>Часы работы по дням</h3><p>С выходными и ночными сменами. Клиент сразу видит, открыто у вас сейчас или нет.</p></div>
-    <div class="card rv" style="--d:60ms"><div class="ico"></div><h3>Кнопка WhatsApp</h3><p>Один тап — и клиент уже пишет вам. Номер искать не надо.</p></div>
-    <div class="card rv" style="--d:120ms"><div class="ico"></div><h3>Услуги и цены</h3><p>Ровно те, что вы перечислили. Лишних услуг и выдуманных цен не появится.</p></div>
-    <div class="card rv" style="--d:180ms"><div class="ico"></div><h3>Ваши фотографии</h3><p>Дайте ссылки — поставим в первый экран и галерею.</p></div>
-    <div class="card rv" style="--d:240ms"><div class="ico"></div><h3>Живёт на телефоне</h3><p>Восемь из десяти клиентов откроют сайт с телефона. Верстка сделана под это.</p></div>
-    <div class="card rv" style="--d:300ms"><div class="ico"></div><h3>Файл остаётся у вас</h3><p>Один файл — это весь сайт. Отдаём его по любому тарифу, чтобы вы ни от кого не зависели. <a href="/fayl.html" style="color:var(--ac);font-weight:600">Как это делается</a></p></div>
-  </div>
-  <p class="micro" style="margin-top:20px">Своих доменов вида mybiz.kz мы пока не подключаем. Хотите красивый адрес — <a href="#help" style="color:var(--ac);font-weight:600">напишите нам</a>, поможем настроить.</p>
-</div></section>
-
-<!-- ═════ цена ═════ -->
-<section class="s soft line" id="price"><div class="w">
-  <div class="head c rv"><span class="k">Цена</span><h2>Два способа получить сайт</h2>
-  <p class="lead">Оба — один платёж без подписки. Разница только в том, кто размещает сайт.</p></div>
-
-  <div class="tariffs">
-    <div class="tariff rv">
-      <span class="t-name">Файл сайта</span>
-      <div class="t-price" data-price="file">4 990 ₸</div>
-      <p class="t-sub">Скачиваете файл и размещаете сами</p>
-      <ul class="t-list">
-        <li>Готовый файл сайта — ваш навсегда</li>
-        <li>Пошаговая инструкция, размещение бесплатное</li>
-        <li>Ни от кого не зависите</li>
-        <li>Занимает пару минут, но делать надо самому</li>
-      </ul>
-      <p class="t-note">Сайт живёт у вас, а не у нас — что бы с нами ни случилось, он продолжит работать.</p>
-      <a class="btn o" href="#build">Собрать сайт</a>
+    <div class="filters">
+      <button class="chip on" data-cat="all">Все</button>
+      <button class="chip" data-cat="it">Сайты и IT</button>
+      <button class="chip" data-cat="food">Еда и доставка</button>
+      <button class="chip" data-cat="shop">Магазины</button>
+      <button class="chip" data-cat="beauty">Красота</button>
+      <button class="chip" data-cat="health">Здоровье</button>
+      <button class="chip" data-cat="auto">Авто</button>
+      <button class="chip" data-cat="build">Стройка и ремонт</button>
+      <button class="chip" data-cat="edu">Обучение</button>
+      <button class="chip" data-cat="event">Праздники</button>
+      <button class="chip" data-cat="b2b">Оптом и B2B</button>
+      <button class="chip" data-cat="service">Услуги</button>
     </div>
-
-    <div class="tariff best rv" style="--d:80ms">
-      <span class="t-badge">Выбирают чаще</span>
-      <span class="t-name">Готовый сайт</span>
-      <div class="t-price" data-price="site">9 990 ₸</div>
-      <p class="t-sub">Даём работающую ссылку — делать ничего не нужно</p>
-      <ul class="t-list">
-        <li>Живая ссылка сразу после оплаты</li>
-        <li>Ставьте её в Instagram, 2ГИС и на визитку</li>
-        <li>Размещением занимаемся мы</li>
-        <li><b>Файл тоже отдаём</b> — на случай, если захотите переехать</li>
-      </ul>
-      <p class="t-note">Ссылка работает, пока работает наш сервис. Если мы его закроем, она перестанет открываться — но файл останется у вас, и сайт можно будет поднять заново по <a href="/fayl.html" target="_blank" rel="noopener">инструкции</a>.</p>
-      <a class="btn" href="#build">Собрать сайт</a>
+    <div class="filters" style="margin-top:0">
+      <button class="chip on" data-mode="all">Любой формат</button>
+      <button class="chip" data-mode="online">Купить онлайн</button>
+      <button class="chip" data-mode="offline">Приехать в точку</button>
+      <select class="city" id="city">
+        <option value="all">Все города</option>
+        <option>Алматы</option><option>Астана</option><option>Шымкент</option>
+        <option>Караганда</option><option>Актобе</option><option>Атырау</option>
+        <option>Тараз</option><option>Павлодар</option><option>Усть-Каменогорск</option>
+        <option>Костанай</option><option>Кызылорда</option><option>Семей</option>
+      </select>
     </div>
-  </div>
-
-  <p class="micro" style="text-align:center;margin-top:18px">Тариф выбирается после того, как увидите готовый сайт. Предпросмотр бесплатный в обоих случаях.</p>
-
-  <div class="verify rv" style="margin-top:26px">
-    <h3 style="margin-bottom:16px">Как мы понимаем, что заплатили именно вы</h3>
-    <div class="vrow"><span class="n">01</span><div><b>Уникальная сумма</b><p>Не 9 990, а 10 127 ₸. Пока ваша бронь жива, эту сумму не получит никто другой.</p></div></div>
-    <div class="vrow"><span class="n">02</span><div><b>Номер чека</b><p>Один чек засчитывается один раз. Повторный сразу подсвечивается в панели.</p></div></div>
-    <div class="vrow"><span class="n">03</span><div><b>Ручная сверка</b><p>Владелец находит поступление в Kaspi и подтверждает. Автовыдачи нет ни в каком виде.</p></div></div>
-  </div>
-</div></section>
-
-<!-- ═════ мастер ═════ -->
-<section class="s line" id="build"><div class="w">
-  <div class="head rv"><span class="k">Сборка</span><h2>Осталось несколько полей</h2>
-  <p class="lead">Описание вы уже написали наверху. Здесь — название, услуги, часы и контакты.</p></div>
-
-  <div class="wizard">
-    <div class="wz rv">
-      <div class="n">1</div>
-      <div>
-        <h3>Бизнес</h3>
-        <div class="row">
-          <label class="field"><span>Название</span><input id="fName" maxlength="60" placeholder="Barber Loft"></label>
-          <label class="field"><span>Город</span><input id="fCity" maxlength="40" value="Алматы"></label>
-        </div>
-        <label class="field"><span>Сфера</span><input id="fCategory" maxlength="60" placeholder="барбершоп, автосервис, кондитерская…"></label>
-        <label class="field"><span>Пожелания по виду сайта <i>необязательно</i></span>
-          <input id="fStyle" maxlength="140" placeholder="в розово-красных цветах, светлый и минималистичный, тёмный премиальный…">
-          <small class="hint">Напишите, каким хотите видеть сайт: цвет, настроение. Учтём при подборе оформления. Не напишете — подберём сами.</small>
-        </label>
-        <label class="field"><span>Ваши услуги, по одной в строке <i>цену через тире</i></span>
-          <textarea id="fServices" rows="5" maxlength="800" placeholder="Мужская стрижка — 5 000 ₸&#10;Оформление бороды — 3 500 ₸&#10;Детская стрижка"></textarea>
-          <small class="hint">На сайт попадут ровно эти услуги и ровно эти цены — ни одной лишней.</small>
-        </label>
-
-        <div class="either">
-          <b>Достаточно чего-то одного</b>
-          <p>Заполните услуги здесь <b>или</b> описание в поле наверху — сайт соберётся в любом случае. Оба вместе дадут более полную страницу.</p>
-        </div>
-      </div>
+    <div class="legend">
+      <span><b class="badge">✓ ПРОВЕРЕНО</b> ИИН или БИН найден в государственном реестре</span>
+      <span><b class="badge soft">☎ КОНТАКТ</b> регистрации нет, но телефон подтверждён звонком</span>
     </div>
+    <div class="grid" id="grid"></div>
 
-    <div class="wz rv" style="--d:60ms">
-      <div class="n">2</div>
-      <div>
-        <h3>Часы работы</h3>
-        <div class="quick">
-          <button type="button" class="chip" data-preset="weekdays">Пн–Пт 9:00–18:00</button>
-          <button type="button" class="chip" data-preset="daily">Ежедневно 10:00–22:00</button>
-          <button type="button" class="chip" data-preset="always">Круглосуточно</button>
-        </div>
-        <div class="hours" id="hoursBox"></div>
-      </div>
-    </div>
-
-    <div class="wz rv" style="--d:120ms">
-      <div class="n">3</div>
-      <div>
-        <h3>Контакты и фото</h3>
-        <div class="row">
-          <label class="field"><span>Телефон</span><input id="fPhone" maxlength="30" placeholder="+7 707 000 00 00"></label>
-          <label class="field"><span>WhatsApp</span><input id="fWhatsapp" maxlength="30" placeholder="+7 707 000 00 00"></label>
-        </div>
-        <div class="row">
-          <label class="field"><span>Адрес <i>необязательно</i></span><input id="fAddress" maxlength="140" placeholder="Алматы, Абая 150, 2 этаж"></label>
-          <label class="field"><span>Instagram <i>необязательно</i></span><input id="fInstagram" maxlength="160" placeholder="https://instagram.com/…"></label>
-        </div>
-        <label class="field"><span>Ссылки на фотографии, по одной в строке <i>необязательно, до трёх</i></span>
-          <textarea id="fPhotos" rows="3" maxlength="900" placeholder="https://…/photo1.jpg&#10;https://…/photo2.jpg"></textarea>
-          <small class="hint">Нужны прямые ссылки, начинающиеся с https. Нет ссылок — соберём градиентные блоки в цвет сайта.</small>
-        </label>
-        <div class="hp"><label>Не заполняйте это поле<input id="fCompanyWebsite" tabindex="-1" autocomplete="off"></label></div>
+    <p style="font-size:13.5px;color:var(--muted);margin-top:20px">KÁSIP.kz — информационный каталог. Мы не продаём товары и услуги размещённых компаний и не являемся стороной сделок между ними и покупателями. Значок подтверждает регистрацию бизнеса, а не качество его работы. Подробности — в <a href="terms.html" style="color:var(--jade)">Правилах размещения</a>.</p>
+    <div class="mapbox" style="margin-top:26px">
+      <iframe title="Карта" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=76.85%2C43.20%2C76.99%2C43.29&amp;layer=mapnik"></iframe>
+      <div class="cap">
+        <span>Так выглядит геометка в карточке офлайн-бизнеса</span>
+        <span><a href="https://2gis.kz/almaty" target="_blank" rel="noopener">Открыть в 2GIS</a> · <a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a></span>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="build">
-    <button class="btn lg" id="btnGenerate">Собрать сайт</button>
-    <span class="micro" id="genHint">Бесплатно, 4 сборки в сутки с одного устройства</span>
-  </div>
-  <p class="micro" style="margin-top:14px">Нажимая «Собрать сайт», вы соглашаетесь с <a href="/oferta.html" style="color:var(--ac);font-weight:600">офертой</a> и <a href="/politika.html" style="color:var(--ac);font-weight:600">политикой обработки персональных данных</a>.</p>
-  <div class="notice" id="genError" hidden></div>
-</div></section>
+<!-- ADD BUSINESS -->
+<section class="sec" id="add" style="background:var(--paper-2);border-top:1px solid var(--line)">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Размещение" data-kz="Орналастыру">Размещение</div>
+    <h2 data-ru="Добавить свой бизнес" data-kz="Бизнесіңізді қосу">Добавить свой бизнес</h2>
+    <div class="form-wrap">
+      <div class="form" id="form">
+        <div class="field full">
+          <label>Название бизнеса</label>
+          <input id="f-name" placeholder="Например: Нан &amp; Kofe">
+        </div>
+        <div class="field">
+          <label>ИИН или БИН — если есть</label>
+          <input id="f-bin" inputmode="numeric" maxlength="12" placeholder="12 цифр, можно пропустить">
+          <span class="hint">Нужен только для проверки в госреестре. В карточке не публикуется и не хранится — после проверки удаляем.</span>
+        </div>
+        <div class="field">
+          <label>Город</label>
+          <input id="f-city" placeholder="Алматы">
+        </div>
+        <div class="field">
+          <label>Категория</label>
+          <select id="f-cat">
+            <option>Сайты и IT</option><option>Еда и доставка</option><option>Магазины</option>
+            <option>Красота</option><option>Здоровье</option><option>Авто</option>
+            <option>Стройка и ремонт</option><option>Обучение</option><option>Праздники</option>
+            <option>Оптом и B2B</option><option>Услуги</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Как покупают</label>
+          <select id="f-mode">
+            <option value="online">Только онлайн</option>
+            <option value="offline">Только в точке</option>
+            <option value="both">Онлайн и в точке</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Геолокация: ссылка из 2GIS или Google Maps</label>
+          <input id="f-geo" placeholder="https://2gis.kz/almaty/firm/...">
+          <span class="hint">Найдите свою точку в <a href="https://2gis.kz" target="_blank" rel="noopener">2GIS</a> или <a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a>, нажмите «Поделиться» и вставьте ссылку сюда. Если работаете только онлайн — оставьте пустым.</span>
+        </div>
+        <div class="field">
+          <label>WhatsApp для заявок</label>
+          <input id="f-wa" inputmode="tel" placeholder="+7 700 000 00 00">
+        </div>
+        <div class="field">
+          <label>Сайт или Instagram</label>
+          <input id="f-site" placeholder="instagram.com/...">
+        </div>
+        <div class="field full">
+          <label>Чем занимаетесь</label>
+          <textarea id="f-desc" placeholder="Две строчки: что продаёте, для кого и от какой цены"></textarea>
+        </div>
+        <div class="field full" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
+          <label>Не заполняйте это поле</label>
+          <input id="f-trap" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field full">
+          <label class="consent">
+            <input type="checkbox" id="f-ok">
+            <span>Согласен на обработку ИИН или БИН — только для разовой проверки бизнеса в государственном реестре. Номер не публикуется и удаляется после проверки. См. <a href="privacy.html" target="_blank" rel="noopener">Политику конфиденциальности</a>.</span>
+          </label>
+        </div>
+        <div class="field full">
+          <button class="btn btn-main" id="send" style="justify-content:center;width:100%">Отправить заявку</button>
+        </div>
+        <div class="ok" id="ok">
+          Заявка собрана и открыта в WhatsApp. Осталось оплатить подписку — карточку публикуем в течение рабочего дня после оплаты.
+        </div>
+      </div>
 
-<!-- ═════ результат ═════ -->
-<section class="s soft line" id="result" hidden><div class="w">
-  <div class="notice good" id="restore" hidden>Продолжаем с прошлого раза — ваш сайт никуда не делся.</div>
-  <div class="res-head">
-    <div>
-      <span class="k">Готово</span>
-      <h2>Ваш сайт</h2>
-      <p class="micro">Код дизайна <span class="mono" id="resultDna">—</span>. Эта комбинация больше не выпадет ни у кого.</p>
-    </div>
-    <div class="res-act">
-      <button class="btn o" id="btnRegen">Другой вариант</button>
-      <button class="btn" id="btnTake">Забрать сайт</button>
-    </div>
-  </div>
-  <div class="pick" id="pick">
-    <div class="pick-head"><b>Как хотите получить сайт?</b></div>
-    <div class="pick-row">
-      <label class="pick-opt">
-        <input type="radio" name="plan" value="file">
-        <span class="pick-body">
-          <b>Файл сайта — <span class="pick-price" data-price="file">4 990 ₸</span></b>
-          <small>Скачиваете и размещаете сами. Бесплатно, пара минут по инструкции.</small>
-        </span>
-      </label>
-      <label class="pick-opt on">
-        <input type="radio" name="plan" value="site" checked>
-        <span class="pick-body">
-          <b>Готовый сайт — <span class="pick-price" data-price="site">9 990 ₸</span></b>
-          <small>Даём работающую ссылку сразу, делать ничего не нужно. Ссылка живёт, пока работает наш сервис; файл на этот случай тоже отдаём.</small>
-        </span>
-      </label>
-    </div>
-    <label class="field" style="margin:14px 0 0;max-width:280px"><span>Телефон для связи</span><input id="fContact" maxlength="30" placeholder="+7 707 000 00 00"></label>
-    <p class="micro" style="margin-top:8px">Нужен, только чтобы связаться по этому заказу. Никаких рассылок.</p>
-  </div>
-  <div class="notice" id="takeError" hidden></div>
-  <div class="frame"><iframe id="preview" title="Предпросмотр сайта"></iframe></div>
-</div></section>
-
-<!-- ═════ оплата ═════ -->
-<section class="s line" id="pay" hidden><div class="w pay-grid">
-  <div class="pay-card">
-    <span class="k">Шаг 1 — оплата</span>
-    <h2>Переведите ровно эту сумму</h2>
-    <p class="micro" id="payPlan" style="margin-bottom:4px">—</p>
-    <div class="amount" id="payAmount">—</div>
-    <p class="lead">Хвостик суммы отличает ваш платёж от всех остальных. Округлять нельзя.</p>
-    <a class="btn lg" id="kaspiLink" target="_blank" rel="noopener">Перейти в Kaspi</a>
-    <div class="pay-meta">
-      <div><span>Бронь истекает через</span><b class="mono" id="payTimer">—</b></div>
-    </div>
-    <div class="codebox">
-      <div class="codebox-top">Сохраните этот код</div>
-      <div class="codebox-code" id="payCode">—</div>
-      <ul class="codebox-why">
-        <li>По коду скачаете файл сайта повторно, с любого устройства</li>
-        <li>Платёж не сошёлся — по коду найдём его за минуту</li>
-        <li>Захотели поправить текст или фото — назовите код в <a href="#help" style="color:var(--ac)">поддержке</a></li>
-      </ul>
-      <button class="btn o sm" id="btnCopy">Скопировать код</button>
-    </div>
-  </div>
-
-  <div class="pay-card">
-    <span class="k">Шаг 2 — чек</span>
-    <h2>Сообщите данные платежа</h2>
-    <label class="field"><span>Отправитель — так, как его показывает Kaspi</span><input id="cPayer" maxlength="80" placeholder="Асхат Н.">
-      <small class="hint">Имя и первая буква фамилии с точкой. Именно в таком виде платёж виден получателю.</small>
-    </label>
-    <div class="row">
-      <label class="field"><span>Номер чека Kaspi</span><input id="cReceipt" maxlength="40" placeholder="123456789"></label>
-      <label class="field"><span>Сумма, которую перевели</span><input id="cAmount" inputmode="numeric" maxlength="9"></label>
-    </div>
-    <label class="field"><span>Дата и время платежа</span><input id="cPaidAt" type="datetime-local"></label>
-    <button class="btn" id="btnClaim">Отправить на проверку</button>
-    <div class="notice" id="claimMsg" hidden></div>
-    <p class="micro" style="margin-top:12px">Номер чека в Kaspi: «Платежи» → нужный перевод → «Чек». Он нужен, чтобы один платёж не засчитали дважды.</p>
-    <p class="micro" style="margin-top:8px">Обычно проверяем в течение нескольких часов в рабочее время. Предельный срок по <a href="/oferta.html" style="color:var(--ac)">оферте</a> — 10 рабочих дней: он на случай, если мы окажемся недоступны.</p>
-  </div>
-</div></section>
-
-<!-- ═════ готово ═════ -->
-<section class="s soft line" id="done" hidden><div class="w">
-  <span class="k">Готово</span>
-  <h2 id="doneTitle">Ваш сайт готов</h2>
-  <p class="lead" id="doneLead">Скачайте файл — это ваш сайт целиком.</p>
-
-  <div class="live" id="liveBox" hidden>
-    <a class="live-url" id="doneUrl" target="_blank" rel="noopener">—</a>
-    <div class="live-act">
-      <a class="btn" id="btnOpenSite" target="_blank" rel="noopener">Открыть сайт</a>
-      <button class="btn o" id="btnCopyUrl">Скопировать ссылку</button>
+      <div>
+        <div class="mapbox">
+          <div class="cap" style="display:block">
+            <b style="color:var(--ink);font-size:15px">Что происходит после отправки</b>
+          </div>
+        </div>
+        <div class="paybox">
+          <h3>Оплата подписки</h3>
+          <ol>
+            <li>Отправляете заявку — она приходит нам в WhatsApp.</li>
+            <li>Оплачиваете подписку по ссылке Kaspi.</li>
+            <li>Присылаете чек в тот же чат.</li>
+            <li>Публикуем карточку и включаем её на 30 дней.</li>
+          </ol>
+          <span class="paytip">на странице Kaspi введите 49 900 ₸</span>
+        <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-sun">Оплатить в Kaspi</a>
+          <div class="term">ПОДПИСКА 30 ДНЕЙ · НАПОМИНАНИЕ ЗА 3 ДНЯ</div>
+          <a class="wa-link btn btn-ghost" href="#add" style="width:100%;justify-content:center;margin-top:12px;border-color:rgba(255,255,255,.25);color:var(--paper-2)">Написать в WhatsApp</a>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="filebox">
-    <div>
-      <b>Файл сайта — ваша копия</b>
-      <p class="micro" style="margin:5px 0 0">Скачайте и сохраните прямо сейчас. Ссылка на нашем домене работает, пока работает сервис, — а файл останется у вас в любом случае.</p>
-    </div>
-    <div style="display:flex;gap:9px;flex-wrap:wrap">
-      <a class="btn" id="btnDownload" download>Скачать файл</a>
-      <a class="btn o" href="/fayl.html" target="_blank" rel="noopener">Инструкция</a>
-    </div>
+<!-- WHY / COMPARE -->
+<section class="sec dark" id="why">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Честное сравнение" data-kz="Әділ салыстыру">Честное сравнение</div>
+    <h2 data-ru="Где сейчас живёт ваш бизнес" data-kz="Бизнесіңіз қазір қайда тұрады">Где сейчас живёт ваш бизнес</h2>
+    <table class="cmp">
+      <thead><tr><th></th><th>Instagram</th><th>2GIS</th><th class="us">KÁSIP</th></tr></thead>
+      <tbody>
+        <tr><td data-l="Находят через Google">Находят через Google</td><td class="no" data-l="Instagram">Нет, посты не индексируются</td><td class="no" data-l="2GIS">Только карточка</td><td class="us" data-l="KÁSIP">Своя страница + SEO-текст</td></tr>
+        <tr><td data-l="Проверка компании">Проверка компании</td><td class="no" data-l="Instagram">Нет</td><td class="no" data-l="2GIS">Частично</td><td class="us" data-l="KÁSIP">ИИН или БИН в госреестре</td></tr>
+        <tr><td data-l="Заявки">Заявки</td><td class="no" data-l="Instagram">Директ, теряется в переписке</td><td class="no" data-l="2GIS">Только звонок</td><td class="us" data-l="KÁSIP">Кнопка WhatsApp с готовым текстом</td></tr>
+        <tr><td data-l="Цены и услуги">Цены и услуги</td><td class="no" data-l="Instagram">В постах, надо листать</td><td class="no" data-l="2GIS">Обычно нет</td><td class="us" data-l="KÁSIP">Таблица прямо на странице</td></tr>
+        <tr><td data-l="Цена входа">Цена входа</td><td class="no" data-l="Instagram">Реклама от 30 000 ₸/мес</td><td class="no" data-l="2GIS">Договор, от 60 000 ₸</td><td class="us" data-l="KÁSIP">4 990 ₸/мес, без автосписаний</td></tr>
+      </tbody>
+    </table>
   </div>
-  <p class="micro" id="doneNote">Нужно поправить текст или добавить фотографии — напишите нам и назовите код заказа.</p>
-</div></section>
+</section>
 
-<!-- ═════ мой заказ ═════ -->
-<section class="s line" id="check"><div class="w check">
-  <div class="rv">
-    <span class="k">После оплаты</span>
-    <h2>Проверить свой заказ</h2>
-    <p class="lead">Введите код вида WD-XXXX — покажем статус, дадим скачать файл и ссылку на сайт, если он у нас размещён. Если оплата ещё не подтверждена, здесь же откроется форма для чека, с любого устройства.</p>
-  </div>
-  <div class="rv" style="--d:60ms">
-    <div class="row">
-      <label class="field"><span>Код заказа</span><input id="sCode" maxlength="12" placeholder="WD-A7K2"></label>
-      <div style="padding-bottom:14px"><button class="btn" id="btnStatus">Проверить</button></div>
-    </div>
-    <div class="notice" id="statusBox" hidden></div>
-  </div>
-</div></section>
-
-<!-- ═════ помощь ═════ -->
-<section class="s line" id="help"><div class="w">
-  <div class="helpbox">
-    <div>
-      <span class="k">Помощь</span>
-      <h2>Что-то пошло не так?</h2>
-      <p class="lead">Оплатили, а сайт не включили. Потеряли код заказа. Нужно поправить текст или добавить фотографии. Напишите — разберёмся.</p>
-      <p class="micro">Отвечаем <span id="helpHours">в рабочее время</span>. Назовите код заказа вида WD-XXXX — так найдём вас быстрее всего. Если код не сохранился, назовите сумму платежа и имя отправителя.</p>
-    </div>
-    <div class="help-act" id="helpLinks">
-      <span class="micro">Загружаем контакты…</span>
+<!-- REASONS -->
+<section class="sec">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Почему выбирают нас" data-kz="Неге бізді таңдайды">Почему выбирают нас</div>
+    <h2 data-ru="Шесть причин, которые считаются в деньгах" data-kz="Ақшамен есептелетін алты себеп">Шесть причин, которые считаются в деньгах</h2>
+    <div class="reasons">
+      <div class="reason"><div class="n">01</div><h3>Оплата в Kaspi за 20 секунд</h3><p>Без счетов, договоров и бухгалтерии. Оплатили с карты — карточка активна 30 дней. Автосписаний нет: чтобы уйти, достаточно ничего не делать.</p></div>
+      <div class="reason"><div class="n">02</div><h3>Два уровня проверки</h3><p>Есть ИИН или БИН — сверяем с госреестром и ставим печать «Тексерілген». Нет регистрации — подтверждаем телефон. Значок получают все, но означает он разное, и клиент это видит.</p></div>
+      <div class="reason"><div class="n">03</div><h3>Вас находят в Google</h3><p>У карточки свой адрес, заголовок и описание — поисковик её индексирует. Посты в Instagram не индексируются вообще, поэтому клиент, который ищет вашу услугу словами, вас там не найдёт.</p></div>
+      <div class="reason"><div class="n">04</div><h3>Ноль процентов с продаж</h3><p>Маркетплейсы забирают 10–15 % с каждого заказа. Мы берём фиксированную сумму: чем больше продаёте, тем дешевле вам обходимся.</p></div>
+      <div class="reason"><div class="n">05</div><h3>Заявка приходит в WhatsApp</h3><p>Кнопка в карточке открывает чат с уже написанным сообщением. Клиенту не надо заполнять форму и ждать ответа на почту — он пишет вам в один тап.</p></div>
+      <div class="reason"><div class="n">06</div><h3>Каталог, а не свалка объявлений</h3><p>Мы не выгружаем контакты из чужих справочников и соцсетей. Каждая карточка размещена самим владельцем и проверена вручную — поэтому здесь нет мёртвых номеров и закрывшихся фирм.</p></div>
     </div>
   </div>
-</div></section>
+</section>
 
-<!-- ═════ вопросы ═════ -->
-<section class="s soft line"><div class="w n">
-  <div class="head c rv"><span class="k">Вопросы</span><h2>Коротко о главном</h2></div>
-  <div class="rv">
-    <details><summary>Правда ли, что сайты не повторяются?</summary><p>Да. Меняется не только цвет: палитра, пара шрифтов, тип первого экрана, характер движения, скругления, порядок блоков и сама раскладка внутри них — услуги могут быть карточками, строками, нумерованным списком или прайс-листом, «о нас» — сплитом, по центру или крупной цитатой. Каждая выпавшая комбинация записывается, и второй раз она не выпадет.</p></details>
-    <details><summary>Обязательно ли писать описание?</summary><p>Нет. Достаточно чего-то одного: либо описания дела, либо списка услуг. Только с услугами получится короткий сайт — первый экран, услуги с ценами, часы работы и контакты. С описанием добавятся блок «о нас», ваши цифры вроде «3 кресла», порядок работы и вопросы-ответы. Ничего выдуманного в обоих случаях не появится.</p></details>
-    <details><summary>Откуда берутся тексты и не выдумывает ли он?</summary><p>Услуги и цены берутся только из вашего списка — что написали, то и будет. Цифры вроде «3 кресла» попадают на сайт, только если они есть в вашем описании: сервер сверяет каждую и выкидывает те, которых вы не называли.</p></details>
-    <details><summary>А если я напишу туда вопрос или ерунду?</summary><p>Сайт не соберётся. Здесь собираются страницы для бизнеса, а не отвечают на вопросы: если в поле не описание дела, вы получите просьбу описать своё дело, и попытка не будет потрачена.</p></details>
-    <details><summary>Что будет, если я закрою вкладку?</summary><p>Ничего не потеряется. Собранный сайт хранится 30 дней и подтянется сам. С другого устройства — введите код заказа в блоке «Мой заказ».</p></details>
-    <details><summary>Кто отвечает за то, что написано на сайте?</summary><p>Вы. Мы размещаем ровно те сведения, которые вы указали: услуги, цены, часы работы. Проверьте их перед оплатой — за достоверность отвечает владелец бизнеса. Если ваша деятельность требует лицензии, указывать её данные на сайте тоже ваша задача.</p></details>
-    <details><summary>Чем тарифы отличаются?</summary><p>По тарифу «Готовый сайт» за 9 990 ₸ мы размещаем сайт сами и даём вам работающую ссылку — делать ничего не нужно. По тарифу «Файл сайта» за 4 990 ₸ вы получаете файл и размещаете его сами: это бесплатно и занимает пару минут по <a href="/fayl.html" style="color:var(--ac);font-weight:600">инструкции</a>. Файл отдаём в обоих случаях.</p></details>
-    <details><summary>А если сервис закроется — что будет с моим сайтом?</summary><p>Скажем прямо: <b>ссылка на нашем домене перестанет открываться</b>. Все сайты, размещённые у нас, вместе с сервисом и исчезнут — поэтому ссылку в визитках придётся менять.</p><p>Но сам сайт не пропадёт: файл уже у вас, он работает независимо от нас, и поднять его заново можно бесплатно за пару минут по <a href="/fayl.html" style="color:var(--ac);font-weight:600">инструкции</a>. Именно поэтому мы отдаём файл всем, а не только тем, кто размещает сам. Сохраните его сразу после оплаты.</p></details>
-    <details><summary>Как быстро я получу файл после оплаты?</summary><p>Обычно в течение нескольких часов в рабочее время — платёж проверяется вручную. В оферте указан предельный срок 10 рабочих дней: он на случай, если мы окажемся недоступны. Как только платёж подтвердят, кнопка скачивания появится на странице сама.</p></details>
-    <details><summary>Что если я оплатил, а файл не пришёл?</summary><p><a href="#help" style="color:var(--ac);font-weight:700">Напишите нам</a> и назовите код заказа и номер чека. Найдём платёж по сумме — она уникальна, спутать её не с чем.</p></details>
+<!-- PRICING -->
+<section class="sec" id="price">
+  <div class="wrap reveal">
+    <div class="eyebrow" data-ru="Тарифы" data-kz="Тарифтер">Тарифы</div>
+    <h2 data-ru="Один набор возможностей. Разница только в сроке." data-kz="Мүмкіндіктер бірдей. Айырмашылық — мерзімде.">Один набор возможностей. Разница только в сроке.</h2>
+    <div class="tiers two">
+      <div class="tier">
+        <div class="name">Ай сайын · помесячно</div>
+        <div class="price">4 990 ₸ <small data-ru="/ месяц" data-kz="/ айына">/ месяц</small></div>
+        <p class="tier-note">Попробовать без обязательств. Платите, пока вам это выгодно.</p>
+        <ul>
+          <li>Отдельная страница бизнеса в Google</li>
+          <li>Печать «Проверенный бизнес» после сверки с госреестром</li>
+          <li>Карточка в каталоге с фильтрами по городу и категории</li>
+          <li>Услуги и цены отдельной таблицей</li>
+          <li>Геометка и маршрут в 2GIS или Google Maps</li>
+          <li>Кнопка WhatsApp с готовым сообщением</li>
+          <li>Ссылка на ваш сайт или Instagram</li>
+        </ul>
+        <span class="paytip">на странице Kaspi введите 4 990 ₸</span>
+        <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-ghost" data-ru="Оплатить 4 990 ₸" data-kz="4 990 ₸ төлеу">Оплатить 4 990 ₸</a>
+      </div>
+      <div class="tier hot">
+        <span class="ribbon">выгоднее на 16 %</span>
+        <div class="name">Жылдық · на год</div>
+        <div class="price">49 900 ₸ <small data-ru="/ год · 4 158 ₸ в месяц" data-kz="/ жылына">/ год · 4 158 ₸ в месяц</small></div>
+        <p class="tier-note">Два месяца в подарок. Один платёж — и год не думаете об оплате.</p>
+        <ul>
+          <li>Всё из помесячного размещения</li>
+          <li>Два месяца бесплатно: платите за 10, стоите 12</li>
+          <li>Место в категории закреплено на год</li>
+          <li>Правки в карточке в любой момент</li>
+          <li>Никаких ежемесячных напоминаний</li>
+        </ul>
+        <span class="paytip">на странице Kaspi введите 49 900 ₸</span>
+        <a href="https://pay.kaspi.kz/pay/cwevqlzj" target="_blank" rel="noopener" class="btn btn-sun" data-ru="Оплатить 49 900 ₸" data-kz="49 900 ₸ төлеу">Оплатить 49 900 ₸</a>
+      </div>
+    </div>
+    <div class="kaspi-note"><b>Kaspi</b><span data-ru="На странице Kaspi введите сумму вручную: 4 990 ₸ за месяц или 49 900 ₸ за год. Затем пришлите чек в WhatsApp — включим карточку в тот же день. Автосписаний нет: деньги сами не уйдут." data-kz="Kaspi бетінде соманы қолмен енгізіңіз: айына 4 990 ₸ немесе жылына 49 900 ₸. Түбіртекті WhatsApp-қа жіберіңіз. Автоматты шегеру жоқ.">На странице Kaspi введите сумму вручную: 4 990 ₸ за месяц или 49 900 ₸ за год. Затем пришлите чек в WhatsApp — включим карточку в тот же день. Автосписаний нет: деньги сами не уйдут.</span></div>
   </div>
-</div></section>
+</section>
 
-<!-- ═════ финал ═════ -->
-<section class="s line"><div class="w"><div class="cta rv">
-  <h2>Ваше дело заслуживает нормального сайта</h2>
-  <p class="lead">Опишите его в трёх предложениях и посмотрите, что получится. Бесплатно.</p>
-  <a class="btn lg" href="#build">Собрать сайт</a>
-</div></div></section>
-
-<a class="help" id="helpBtn" href="#" target="_blank" rel="noopener" hidden aria-label="Написать в поддержку">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-1.5-.6-3.4-1.7-4.9-3.8-.6-.8-1-1.7-1.1-2.5-.1-.8.2-1.5.6-1.9.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.4l.7 1.7c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.4.7 1 1.3 1.6 1.8.6.4 1.1.6 1.3.7.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.2.1.6-.1 1.1Z"/></svg>
-  <span>Помощь</span>
-</a>
-
-<footer class="foot"><div class="w">
-  <div class="foot-in" style="margin-bottom:16px">
-    <span><b style="color:var(--ink)">WeDesign</b> · сайты для бизнеса Казахстана</span>
-    <span class="micro">
-      <a href="#help" style="color:var(--ac);font-weight:600">Помощь</a> ·
-      <a href="/fayl.html" style="color:var(--ac);font-weight:600">Файл сайта</a> ·
-      <a href="/oferta.html" style="color:var(--ac);font-weight:600">Оферта</a> ·
-      <a href="/politika.html" style="color:var(--ac);font-weight:600">Персональные данные</a>
-    </span>
+<div class="wrap">
+  <div class="final reveal">
+    <h2 data-ru="Займите место в своей категории" data-kz="Санатыңыздан орын алыңыз">Займите место в своей категории</h2>
+    <p data-ru="Каталог только открылся. Кто зайдёт первым в своей категории — тот и стоит наверху, пока платит подписку." data-kz="Каталог жаңа ашылды. Санатына бірінші кірген бизнес жоғарыда тұрады.">Каталог только открылся. Кто зайдёт первым в своей категории — тот и стоит наверху, пока платит подписку.</p>
+    <a href="#add" class="btn btn-sun" style="margin-top:30px" data-ru="Разместить бизнес" data-kz="Бизнесті орналастыру">Разместить бизнес</a>
   </div>
-  <div class="micro" style="border-top:1px solid var(--line);padding-top:16px;line-height:1.7">
-    ИП «Б.А.С.Т.А. PAY GROUP»<br>
-    Республика Казахстан, г. Алматы · Телефон и WhatsApp: +7 708 271 59 54<br>
-    Оплата через Kaspi. Проверка платежей ручная. Автосписаний нет.
-  </div>
-</div></footer>
+</div>
 
-<script src="/assets/app.js"></script>
+<div class="wrap"><footer>
+  <span>ИП «Б.А.С.Т.А. PAY GROUP»<br>KÁSIP.kz — реестр бизнесов Казахстана · <a class="wa-link" href="#add" style="color:var(--jade);text-decoration:none;font-weight:600">Написать в WhatsApp</a></span>
+  <span><a href="privacy.html" style="color:var(--muted)">Политика конфиденциальности</a> · <a href="terms.html" style="color:var(--muted)">Правила размещения</a></span>
+  <span>Оплата — Kaspi</span>
+</footer></div>
+
+<script src="data.js"></script>
+<script>
+const KASPI="https://pay.kaspi.kz/pay/cwevqlzj";
+const OWNER_WA=["7708","271","59","54"].join(""); /* номер для заявок, собирается по частям */
+document.querySelectorAll(".wa-link").forEach(a=>{
+  a.href="https://wa.me/"+OWNER_WA;a.target="_blank";a.rel="noopener";
+});
+
+const DATA = (typeof BUSINESSES !== "undefined" && Array.isArray(BUSINESSES)) ? BUSINESSES : null;
+
+const esc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^(https?:\/\/|biz\/)/i.test(u||'')?u:'#';
+const grid=document.getElementById('grid'),city=document.getElementById('city');
+let cat='all',mode='all';
+
+function card(b){
+  const tags=[];
+  if(b.mode==='online'||b.mode==='both') tags.push('<span class="tag online">Купить онлайн</span>');
+  if(b.mode==='offline'||b.mode==='both') tags.push('<span class="tag offline">Есть точка</span>');
+  const geo=b.geo?`<a class="tag" href="${safeUrl(b.geo)}" target="_blank" rel="noopener nofollow">На карте</a>`:'';
+  const site=b.site?`<a class="tag link" href="${safeUrl(b.site)}" target="_blank" rel="noopener nofollow">Перейти на сайт ↗</a>`:'';
+  return `<article class="biz">
+      <div class="top"><h3><a class="stretch" href="${safeUrl(b.url)}">${esc(b.n)}</a></h3>${b.v===1?'<span class="badge">✓ ПРОВЕРЕНО</span>':b.v===2?'<span class="badge soft">☎ КОНТАКТ</span>':''}</div>
+      <p class="desc">${esc(b.d)}</p>
+      <div class="tags">${tags.join('')}${site}${geo}</div>
+      <div class="foot"><span class="geo">${esc(b.city)}</span><span>${esc(b.p)}</span></div>
+    </article>`;
+}
+const free=`<article class="biz free">
+      <div class="top"><h3><a class="stretch" href="#add">Место свободно</a></h3></div>
+      <p class="desc">Первая строка в этой категории и городе. Занимается по подписке, не по знакомству.</p>
+      <div class="tags"><span class="tag">Онлайн</span><span class="tag">Точка на карте</span></div>
+      <div class="foot"><span class="geo">Ваш город</span><span>от 4 990 ₸</span></div>
+    </article>`;
+
+function render(){
+  if(!DATA){
+    grid.innerHTML='<div class="empty">Каталог временно недоступен. Проверьте файл data.js — вероятно, в строке бизнеса пропущена запятая или кавычка.</div>';
+    return;
+  }
+  const today=new Date().toISOString().slice(0,10);
+  const c=city.value;
+  const list=DATA.filter(b=>
+    (b.status!=='off') &&
+    (!b.until || b.until>=today) &&
+    (cat==='all'||b.c===cat)&&
+    (c==='all'||b.city===c)&&
+    (mode==='all'||b.mode===mode||b.mode==='both'));
+  grid.innerHTML=list.map(card).join('')+free+free;
+}
+document.querySelectorAll('.chip[data-cat]').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip[data-cat]').forEach(x=>x.classList.remove('on'));
+  ch.classList.add('on');cat=ch.dataset.cat;render();
+}));
+document.querySelectorAll('.chip[data-mode]').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip[data-mode]').forEach(x=>x.classList.remove('on'));
+  ch.classList.add('on');mode=ch.dataset.mode;render();
+}));
+city.addEventListener('change',render);
+render();
+
+/* ---------- форма размещения ---------- */
+const g=id=>document.getElementById(id);
+let lastSent=0;
+g('send').addEventListener('click',()=>{
+  const v=id=>g(id).value.trim();
+  if(v('f-trap')) return;                       /* заполнено только ботом */
+  if(Date.now()-lastSent<20000) return;         /* не чаще раза в 20 секунд */
+  const need=[['f-name','название'],['f-city','город'],['f-wa','WhatsApp']];
+  const miss=need.filter(([id])=>!v(id));
+  if(miss.length){
+    g(miss[0][0]).focus();
+    g(miss[0][0]).style.borderColor='#C0452F';
+    return;
+  }
+  const bin=v('f-bin').replace(/\D/g,'');
+  if(v('f-bin') && bin.length!==12){
+    g('f-bin').style.borderColor='#C0452F';g('f-bin').focus();return;
+  }
+  if(v('f-wa').replace(/\D/g,'').length<10){
+    g('f-wa').style.borderColor='#C0452F';g('f-wa').focus();return;
+  }
+  if(g('f-bin').value.trim() && !g('f-ok').checked){
+    document.querySelector('.consent').classList.add('err');
+    document.querySelector('.consent').scrollIntoView({block:'center',behavior:'smooth'});
+    return;
+  }
+  const modes={online:'Только онлайн',offline:'Только в точке',both:'Онлайн и в точке'};
+  const text=
+`Заявка на размещение в KÁSIP
+Название: ${v('f-name')}
+ИИН/БИН: ${v('f-bin')||'нет регистрации'}
+Город: ${v('f-city')}
+Категория: ${v('f-cat')}
+Формат: ${modes[v('f-mode')]}
+Геолокация: ${v('f-geo')||'нет, только онлайн'}
+WhatsApp: ${v('f-wa')}
+Сайт: ${v('f-site')||'нет'}
+Описание: ${v('f-desc')||'—'}`;
+  lastSent=Date.now();
+  window.open('https://wa.me/'+OWNER_WA+'?text='+encodeURIComponent(text),'_blank');
+  g('ok').classList.add('show');
+});
+document.querySelectorAll('.field input,.field select,.field textarea')
+  .forEach(el=>el.addEventListener('input',()=>el.style.borderColor=''));
+g('f-ok').addEventListener('change',()=>document.querySelector('.consent').classList.remove('err'));
+
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
+  const l=b.dataset.lang;
+  document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('[data-ru]').forEach(el=>{el.textContent=el.dataset[l]||el.dataset.ru;});
+  document.documentElement.lang=l==='kz'?'kk':'ru';
+}));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://kasip.vercel.app/#org",
+      "name": "KÁSIP.kz",
+      "alternateName": ["KASIP", "Касип", "Kasip.kz", "КАСИП"],
+      "url": "https://kasip.vercel.app/",
+      "description": "Каталог бизнесов Казахстана с проверкой регистрации в государственном реестре.",
+      "areaServed": { "@type": "Country", "name": "Казахстан" },
+      "founder": { "@type": "Organization", "name": "ИП Б.А.С.Т.А. PAY GROUP" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kasip.vercel.app/#site",
+      "url": "https://kasip.vercel.app/",
+      "name": "KÁSIP.kz — каталог бизнесов Казахстана",
+      "inLanguage": ["ru", "kk"],
+      "publisher": { "@id": "https://kasip.vercel.app/#org" }
+    }
+  ]
+}
+</script>
 </body>
 </html>

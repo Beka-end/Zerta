@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Панель размещения — KÁSIP.kz</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#E9EEEA;--paper-2:#F5F8F5;--ink:#0D1B1E;--jade:#0F7A6B;--jade-deep:#07403A;--sun:#E4A03C;--line:#C3CFC8;--muted:#5C6F6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Golos Text',system-ui,sans-serif;font-size:16px;line-height:1.5}
+.wrap{width:min(1080px,94vw);margin:0 auto;padding:34px 0 70px}
+h1{font-family:'Unbounded',sans-serif;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.02em;margin:0 0 6px}
+h2{font-family:'Unbounded',sans-serif;font-size:17px;font-weight:600;margin:0 0 14px}
+.sub{color:var(--muted);margin:0 0 30px;max-width:62ch}
+.cols{display:grid;grid-template-columns:1fr 400px;gap:34px;align-items:start}
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:24px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.f{display:flex;flex-direction:column;gap:5px}
+.f.full{grid-column:1/-1}
+label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+input,select,textarea{font-family:inherit;font-size:15px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+textarea{resize:vertical;min-height:74px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--jade)}
+.hint{font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:15px;padding:13px 22px;border-radius:100px;text-decoration:none;transition:.18s}
+.btn-main{background:var(--jade);color:#fff;width:100%}
+.btn-main:hover{background:var(--jade-deep)}
+.btn-sm{background:var(--ink);color:var(--paper);font-size:13px;padding:9px 15px}
+.btn-sm:hover{background:var(--jade-deep)}
+.out{margin-top:22px}
+.out h2{display:flex;align-items:center;justify-content:space-between;gap:12px}
+pre{background:var(--ink);color:#C6D6D2;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.55;
+  padding:16px;border-radius:12px;overflow:auto;white-space:pre-wrap;word-break:break-word;margin:0}
+ol{padding-left:20px;margin:0}
+ol li{margin-bottom:11px;color:var(--muted)}
+ol li b{color:var(--ink)}
+.warn{background:rgba(228,160,60,.15);border-left:3px solid var(--sun);border-radius:10px;padding:14px 16px;font-size:14px;margin-top:16px}
+.ok{background:rgba(15,122,107,.12);border-left:3px solid var(--jade);border-radius:10px;padding:14px 16px;font-size:14px;margin-top:16px;display:none}
+.ok.show{display:block}
+
+#gate{position:fixed;inset:0;z-index:999;background:var(--ink);display:grid;place-items:center;padding:24px}
+#gate .box{width:min(360px,92vw);text-align:center}
+#gate h2{font-family:'Unbounded',sans-serif;font-size:22px;color:var(--paper-2);margin:0 0 8px;justify-content:center}
+#gate p{color:#8FA8A4;font-size:14.5px;margin:0 0 22px}
+#gate input{text-align:center;font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.5em;
+  padding:14px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;border-radius:12px}
+#gate input::placeholder{letter-spacing:.3em;font-size:16px}
+#gate button{margin-top:12px;width:100%;background:var(--jade);color:#fff;border:0;font-family:inherit;
+  font-weight:600;font-size:15px;padding:13px;border-radius:100px;cursor:pointer}
+#gate button:hover{background:#0a5f54}
+#gate .err{color:#F0846F;font-size:13.5px;min-height:20px;margin-top:12px}
+#gate .lock{font-size:30px;margin-bottom:10px}
+body.locked{overflow:hidden}
+@media(max-width:900px){.cols{grid-template-columns:1fr;gap:22px}.grid{grid-template-columns:1fr}}
+@media(max-width:760px){
+  .wrap{width:calc(100% - 28px);padding:24px 0 50px}
+  .card{padding:19px}
+  h1{font-size:25px}
+  .sub{margin-bottom:22px;font-size:15px}
+  pre{font-size:11.5px;padding:13px}
+  ol li{font-size:14.5px}
+  #gate input{font-size:21px;letter-spacing:.35em}
+}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="box">
+    <div class="lock">🔒</div>
+    <h2>Панель размещения</h2>
+    <p>KÁSIP.kz · служебный доступ</p>
+    <input id="pin" type="password" inputmode="numeric" maxlength="12" placeholder="код" autocomplete="off" autofocus>
+    <button id="unlock">Войти</button>
+    <div class="err" id="gerr"></div>
+  </div>
+</div>
+
+<div class="wrap">
+<h1>Панель размещения</h1>
+<p class="sub">Перенесите сюда данные из заявки в WhatsApp — панель соберёт готовый файл карточки и строку для каталога. Страница работает у вас на компьютере, ничего никуда не отправляет и в поиске не показывается.</p>
+
+<div class="cols">
+  <div>
+    <div class="card">
+      <h2>Данные из заявки</h2>
+      <div class="grid">
+        <div class="f full"><label>Название бизнеса</label><input id="name" placeholder="Нан &amp; Kofe"></div>
+        <div class="f"><label>Адрес страницы</label><input id="slug" placeholder="nan-kofe"><span class="hint">Латиницей, через дефис. Станет ссылкой /biz/nan-kofe</span></div>
+        <div class="f"><label>Город</label><input id="city" placeholder="Шымкент"></div>
+        <div class="f"><label>Категория</label>
+          <select id="cat">
+            <option value="it">Сайты и IT</option><option value="food">Еда и доставка</option>
+            <option value="shop">Магазины</option><option value="beauty">Красота</option>
+            <option value="health">Здоровье</option><option value="auto">Авто</option>
+            <option value="build">Стройка и ремонт</option><option value="edu">Обучение</option>
+            <option value="event">Праздники</option><option value="b2b">Оптом и B2B</option>
+            <option value="service">Услуги</option>
+          </select>
+        </div>
+        <div class="f"><label>Формат работы</label>
+          <select id="mode"><option value="online">Только онлайн</option><option value="offline">Только в точке</option><option value="both">Онлайн и в точке</option></select>
+        </div>
+        <div class="f"><label>Значок</label>
+          <select id="v">
+            <option value="1">Проверено — ИИН или БИН сверен с реестром</option>
+            <option value="2">Контакт — дозвонились по номеру</option>
+            <option value="0">Без значка</option>
+          </select>
+        </div>
+        <div class="f"><label>Цена в каталоге</label><input id="price" placeholder="от 900 ₸"></div>
+        <div class="f"><label>Оплачено до</label><input id="until" type="date"><span class="hint">Дата оплаты плюс 30 дней. После неё карточка скроется сама.</span></div>
+        <div class="f full"><label>Короткое описание для каталога</label><textarea id="short" placeholder="Одно-два предложения: что продают и от какой цены"></textarea></div>
+        <div class="f full"><label>Подробно: чем занимается</label><textarea id="long" placeholder="Два-три абзаца для страницы. Пустая строка разделяет абзацы."></textarea></div>
+        <div class="f"><label>WhatsApp клиента</label><input id="wa" placeholder="+7 701 234 56 78"></div>
+        <div class="f"><label>Сайт или Instagram</label><input id="site" placeholder="https://instagram.com/..."></div>
+        <div class="f full"><label>Ссылка на карту — для офлайн-бизнеса</label><input id="geo" placeholder="https://2gis.kz/shymkent/firm/..."></div>
+        <div class="f full"><label>Адрес точки</label><input id="addr" placeholder="Шымкент, улица и номер дома"></div>
+        <div class="f full"><label>Услуги и цены — по одной в строке, через точку с запятой</label>
+          <textarea id="serv" placeholder="Доставка выпечки в офис; от 900 ₸&#10;Торт на заказ; от 6 000 ₸"></textarea></div>
+      </div>
+      <button class="btn btn-main" id="go" style="margin-top:20px">Собрать карточку</button>
+      <div class="ok" id="done">Файл скачан. Ниже — строка для каталога и адрес для карты сайта.</div>
+    </div>
+
+    <div class="out">
+      <div class="card">
+        <h2>Строка для каталога <button class="btn btn-sm" data-copy="dataline">Скопировать</button></h2>
+        <pre id="dataline">Заполните форму и нажмите «Собрать карточку».</pre>
+        <h2 style="margin-top:22px">Строка для sitemap.xml <button class="btn btn-sm" data-copy="siteline">Скопировать</button></h2>
+        <pre id="siteline">—</pre>
+      </div>
+    </div>
+  </div>
+
+  <aside class="card">
+    <h2>Что делать после оплаты</h2>
+    <ol>
+      <li><b>Проверьте бизнес.</b> Есть ИИН или БИН — найдите на kgd.gov.kz в поиске налогоплательщика. Сошлось — значок «Проверено». Нет номера — позвоните и поставьте «Контакт».</li>
+      <li><b>Удалите ИИН из переписки.</b> Сразу после проверки. У вас остаётся только факт и дата.</li>
+      <li><b>Заполните форму слева</b> и нажмите «Собрать карточку» — скачается файл вида <code>nan-kofe.html</code>.</li>
+      <li><b>Положите файл в папку biz/</b> вашего проекта.</li>
+      <li><b>Вставьте строку каталога</b> в файл <code>data.js</code> — сразу после строки <code>const BUSINESSES=[</code>. Больше ничего в проекте трогать не нужно.</li>
+      <li><b>Вставьте строку в sitemap.xml</b> перед закрывающим тегом.</li>
+      <li><b>Отправьте изменения:</b><br><code>git add .</code><br><code>git commit -m "Добавил Нан &amp; Kofe"</code><br><code>git push</code></li>
+      <li><b>Дата окончания уже в строке.</b> После неё карточка скроется из каталога сама — вручную ничего удалять не нужно. Напомните клиенту за три дня.</li>
+    </ol>
+    <div class="warn"><b>Снять карточку раньше срока:</b> поменяйте в её строке <code>status:"active"</code> на <code>status:"off"</code> и отправьте изменения. Файл в папке biz/ оставьте — если клиент вернётся и оплатит, достаточно вернуть строку обратно.</div>
+  </aside>
+</div>
+</div>
+
+<script>
+
+/* ---------- вход ---------- */
+document.body.classList.add('locked');
+const HASH="62c488bbaded8ff5903a5b55b345a49d74385768c7e5601aa5d0b6126dd694b5";
+let tries=0;
+async function sha(t){
+  const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+async function tryUnlock(){
+  const pin=document.getElementById('pin');
+  const err=document.getElementById('gerr');
+  if(tries>=5){ err.textContent='Слишком много попыток. Обновите страницу.'; return; }
+  if(await sha(pin.value.trim())===HASH){
+    document.getElementById('gate').remove();
+    document.body.classList.remove('locked');
+  }else{
+    tries++; pin.value=''; err.textContent='Неверный код. Осталось попыток: '+(5-tries);
+  }
+}
+document.getElementById('unlock').addEventListener('click',tryUnlock);
+document.getElementById('pin').addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock();});
+
+const g=id=>document.getElementById(id);
+const val=id=>g(id).value.trim();
+const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CATS={it:'Сайты и IT',food:'Еда и доставка',shop:'Магазины',beauty:'Красота',health:'Здоровье',
+  auto:'Авто',build:'Стройка и ремонт',edu:'Обучение',event:'Праздники',b2b:'Оптом и B2B',service:'Услуги'};
+const MODES={online:'Онлайн',offline:'В точке',both:'Онлайн и в точке'};
+const SITE="https://kasip.vercel.app";  /* при покупке домена меняется только здесь */
+const OWNER_WA=["7708","271","59","54"].join("");
+
+function waLink(raw){
+  const d=String(raw||'').replace(/\D/g,'');
+  return d?'https://wa.me/'+(d.length===11&&d[0]==='8'?'7'+d.slice(1):d):'';
+}
+
+function build(){
+  const name=val('name'), slug=val('slug').toLowerCase().replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  if(!name||!slug){ alert('Заполните название и адрес страницы'); return; }
+  const cat=val('cat'), city=val('city'), mode=val('mode'), v=+val('v'), price=val('price');
+  const short=val('short'), site=val('site'), geo=val('geo'), addr=val('addr');
+  const wa=waLink(val('wa'));
+  const paras=val('long').split(/\n\s*\n/).filter(Boolean).map(p=>'      <p>'+esc(p.trim())+'</p>').join('\n');
+  const rows=val('serv').split('\n').filter(Boolean).map(l=>{
+    const [a,b]=l.split(';');
+    return '        <div class="row"><span>'+esc((a||'').trim())+'</span><b>'+esc((b||'').trim())+'</b></div>';
+  }).join('\n');
+
+  const badges=[
+    v===1?'<span class="badge">✓ ПРОВЕРЕННЫЙ БИЗНЕС</span>':v===2?'<span class="badge sun">☎ КОНТАКТ ПОДТВЕРЖДЁН</span>':'',
+    '<span class="badge sun">'+esc(MODES[mode].toUpperCase())+'</span>',
+    '<span class="badge plain">'+esc(CATS[cat].toUpperCase())+'</span>'
+  ].filter(Boolean).join('\n    ');
+
+  const mapBlock = (mode!=='online'&&(geo||addr)) ? `
+    <section class="block">
+      <h2>Как добраться</h2>${addr?'\n      <p>'+esc(addr)+'</p>':''}${geo?'\n      <p><a href="'+esc(geo)+'" target="_blank" rel="noopener nofollow">Построить маршрут</a></p>':''}
+    </section>` : '';
+
+  const ld = JSON.stringify({
+    "@context":"https://schema.org","@type":"LocalBusiness","name":name,"description":short,
+    "url":site||undefined,"telephone":val('wa')||undefined,
+    "address":{"@type":"PostalAddress","streetAddress":addr||undefined,"addressLocality":city,"addressCountry":"KZ"}
+  },null,2);
+
+  const html =
+'<!DOCTYPE html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n'+
+'<meta name="viewport" content="width=device-width, initial-scale=1">\n'+
+'<title>'+esc(name)+' — '+esc(CATS[cat])+', '+esc(city)+' | KÁSIP.kz</title>\n'+
+'<meta name="description" content="'+esc(short)+'">\n'+
+'<link rel="canonical" href="'+SITE+'/biz/'+slug+'.html">\n'+
+'<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">\n'+
+'<style>\n'+
+':root{--paper:#E9EEEA;--paper-2:#F5F8F5;--ink:#0D1B1E;--jade:#0F7A6B;--jade-deep:#07403A;--sun:#E4A03C;--line:#C3CFC8;--muted:#5C6F6B}\n'+
+'*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:\'Golos Text\',system-ui,sans-serif;font-size:17px;line-height:1.55}\n'+
+'.wrap{width:min(1080px,92vw);margin:0 auto}a{color:inherit}\n'+
+'h1{font-family:\'Unbounded\',sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,50px);letter-spacing:-.025em;line-height:1.05;margin:0}\n'+
+'h2{font-family:\'Unbounded\',sans-serif;font-weight:600;font-size:21px;margin:0 0 14px}p{margin:0 0 14px}\n'+
+'.nav{position:sticky;top:0;z-index:40;background:rgba(233,238,234,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}\n'+
+'.nav-in{display:flex;align-items:center;gap:20px;height:64px}\n'+
+'.logo{font-family:\'Unbounded\',sans-serif;font-weight:800;font-size:19px;text-decoration:none}.logo span{color:var(--jade)}\n'+
+'.nav .btn{margin-left:auto}\n'+
+'.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:15.5px;padding:12px 22px;border-radius:100px;text-decoration:none;transition:.18s}\n'+
+'.btn-main{background:var(--jade);color:#fff}.btn-main:hover{background:var(--jade-deep)}\n'+
+'.btn-ghost{border:1.5px solid var(--line)}.btn-ghost:hover{border-color:var(--ink)}\n'+
+'.btn-wa{background:#25D366;color:#06331A}.btn-wa:hover{filter:brightness(1.05)}\n'+
+'.crumbs{font-family:\'JetBrains Mono\',monospace;font-size:12px;color:var(--muted);padding:22px 0 0;display:flex;gap:8px;flex-wrap:wrap}\n'+
+'.crumbs a{text-decoration:none}.head{padding:26px 0 34px;border-bottom:1px solid var(--line)}\n'+
+'.badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}\n'+
+'.badge{font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:.07em;padding:6px 11px;border-radius:7px;background:rgba(15,122,107,.12);color:var(--jade)}\n'+
+'.badge.sun{background:rgba(228,160,60,.2);color:#8A5C0F}.badge.plain{background:transparent;border:1px solid var(--line);color:var(--muted)}\n'+
+'.lede{font-size:19px;color:var(--muted);max-width:56ch;margin-top:18px}\n'+
+'.cols{display:grid;grid-template-columns:1fr 350px;gap:44px;padding:40px 0 70px;align-items:start}\n'+
+'.block{margin-bottom:38px}\n'+
+'.prices{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper-2)}\n'+
+'.prices .row{display:flex;justify-content:space-between;gap:16px;padding:15px 18px;border-bottom:1px solid var(--line)}\n'+
+'.prices .row:last-child{border-bottom:0}.prices b{font-family:\'JetBrains Mono\',monospace;font-size:15px;white-space:nowrap}\n'+
+'.side{position:sticky;top:88px;display:flex;flex-direction:column;gap:14px}\n'+
+'.panel{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:22px}\n'+
+'.panel.dark{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}\n'+
+'.panel h3{font-family:\'Unbounded\',sans-serif;font-size:16px;font-weight:600;margin:0 0 14px}\n'+
+'.panel .btn{width:100%;margin-top:6px}\n'+
+'.kv{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:15px}\n'+
+'.kv:last-child{border-bottom:0}.kv span{color:#8FA8A4}\n'+
+'.disclaimer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;margin-top:20px}\n'+
+'footer{border-top:1px solid var(--line);padding:28px 0 44px;font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}\n'+
+'footer a{color:var(--muted)}\n'+
+'@media(max-width:880px){.cols{grid-template-columns:1fr;gap:30px}.side{position:static}}\n'+
+':focus-visible{outline:2.5px solid var(--jade);outline-offset:3px}\n'+
+'</style>\n</head>\n<body>\n\n'+
+'<nav class="nav"><div class="wrap nav-in">\n  <a class="logo" href="../index.html">KÁSIP<span>.kz</span></a>\n'+
+'  <a class="btn btn-ghost" href="../index.html#add">Разместить бизнес</a>\n</div></nav>\n\n'+
+'<div class="wrap"><div class="crumbs">\n  <a href="../index.html">Каталог</a> <span>/</span>\n'+
+'  <a href="../index.html#catalog">'+esc(CATS[cat])+'</a> <span>/</span>\n  <span>'+esc(city)+'</span> <span>/</span>\n  <span>'+esc(name)+'</span>\n</div></div>\n\n'+
+'<header class="wrap head">\n  <div class="badges">\n    '+badges+'\n  </div>\n'+
+'  <h1>'+esc(name)+'</h1>\n  <p class="lede">'+esc(short)+'</p>\n</header>\n\n'+
+'<main class="wrap cols">\n  <div>\n'+
+(paras?'    <section class="block">\n      <h2>Чем занимается</h2>\n'+paras+'\n    </section>\n\n':'')+
+(rows?'    <section class="block">\n      <h2>Услуги и цены</h2>\n      <div class="prices">\n'+rows+'\n      </div>\n    </section>\n\n':'')+
+(mapBlock?mapBlock+'\n\n':'')+
+'    <div class="disclaimer">\n      KÁSIP.kz — информационный каталог. Мы не продаём товары и услуги размещённых компаний и не являемся стороной сделок.\n'+
+'      Значок подтверждает регистрацию бизнеса, а не качество его работы. Подробности — в <a href="../terms.html">Правилах размещения</a>.\n    </div>\n  </div>\n\n'+
+'  <aside class="side">\n    <div class="panel dark">\n      <h3>Связаться</h3>\n'+
+(wa?'      <a class="btn btn-wa" href="'+wa+'" target="_blank" rel="noopener">Написать в WhatsApp</a>\n':'')+
+(site?'      <a class="btn btn-main" href="'+esc(site)+'" target="_blank" rel="noopener nofollow" style="margin-top:10px">Открыть сайт</a>\n':'')+
+'      <div style="margin-top:18px">\n        <div class="kv"><span>Категория</span><b>'+esc(CATS[cat])+'</b></div>\n'+
+'        <div class="kv"><span>Город</span><b>'+esc(city)+'</b></div>\n'+
+'        <div class="kv"><span>Формат</span><b>'+esc(MODES[mode])+'</b></div>\n      </div>\n    </div>\n\n'+
+'  </aside>\n</main>\n\n'+
+'<div class="wrap"><footer>\n  <span>ИП «Б.А.С.Т.А. PAY GROUP»<br>KÁSIP.kz — каталог бизнесов Казахстана</span>\n'+
+'  <span><a href="../privacy.html">Политика конфиденциальности</a> · <a href="../terms.html">Правила размещения</a></span>\n</footer></div>\n\n'+
+'<script type="application/ld+json">\n'+ld+'\n<\/script>\n</body>\n</html>\n';
+
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=slug+'.html'; a.click();
+  URL.revokeObjectURL(a.href);
+
+  const q=t=>JSON.stringify(String(t||''));
+  g('dataline').textContent =
+    ' {n:'+q(name)+', c:'+q(cat)+', city:'+q(city)+', mode:'+q(mode)+',\n'+
+    '  d:'+q(short)+',\n'+
+    '  v:'+v+', p:'+q(price)+', url:'+q('biz/'+slug+'.html')+
+    (site?', site:'+q(site):'')+', geo:'+q(geo)+',\n'+
+    '  until:'+q(val('until'))+', status:"active"},';
+  g('siteline').textContent =
+    '  <url>\n    <loc>'+SITE+'/biz/'+slug+'.html</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>';
+  g('done').classList.add('show');
+}
+(function(){const d=new Date();d.setDate(d.getDate()+30);g('until').value=d.toISOString().slice(0,10);})();
+g('go').addEventListener('click',build);
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+  navigator.clipboard.writeText(g(b.dataset.copy).textContent);
+  const t=b.textContent; b.textContent='Скопировано'; setTimeout(()=>b.textContent=t,1400);
+}));
+</script>
+</body>
+</html>

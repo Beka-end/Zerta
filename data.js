@@ -10,9 +10,9 @@
    ============================================================ */
 const BUSINESSES=[
 
- {n:"Нан & Kofe", c:"it", city:"Шымкент", mode:"online",
-  d:"ЗАМЕНИТЕ ЭТОТ ТЕКСТ: одно-два предложения о том, что продают и от какой цены.",
-  v:1, p:"от 900 ₸", url:"biz/nan-kofe.html", geo:"",
-  until:"2026-09-03", status:"active"},
+ {n:"Vidok Barbershop", c:"услуги", city:"Алматы", mode:"online",
+  d:"Барбершоп,делаем стрижки от 5000тг",
+  v:1, p:"от 5000 ₸", url:"biz/vidokbarbershop.html", geo:"",
+  until:"2026-09-04", status:"active"},
 
 ];

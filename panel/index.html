@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Панель размещения — KÁSIP.kz</title>
+<title>Панель размещения — Zerta.kz</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{--paper:#E9EEEA;--paper-2:#F5F8F5;--ink:#0D1B1E;--jade:#0F7A6B;--jade-deep:#07403A;--sun:#E4A03C;--line:#C3CFC8;--muted:#5C6F6B}
@@ -70,7 +70,7 @@ body.locked{overflow:hidden}
   <div class="box">
     <div class="lock">🔒</div>
     <h2>Панель размещения</h2>
-    <p>KÁSIP.kz · служебный доступ</p>
+    <p>Zerta.kz · служебный доступ</p>
     <input id="pin" type="password" inputmode="numeric" maxlength="12" placeholder="код" autocomplete="off" autofocus>
     <button id="unlock">Войти</button>
     <div class="err" id="gerr"></div>
@@ -181,7 +181,7 @@ const esc=t=>String(t||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const CATS={it:'Сайты и IT',food:'Еда и доставка',shop:'Магазины',beauty:'Красота',health:'Здоровье',
   auto:'Авто',build:'Стройка и ремонт',edu:'Обучение',event:'Праздники',b2b:'Оптом и B2B',service:'Услуги'};
 const MODES={online:'Онлайн',offline:'В точке',both:'Онлайн и в точке'};
-const SITE="https://kasip.vercel.app";  /* при покупке домена меняется только здесь */
+const SITE="https://zerta.vercel.app";  /* при покупке домена меняется только здесь */
 const OWNER_WA=["7708","271","59","54"].join("");
 
 function waLink(raw){
@@ -221,7 +221,7 @@ function build(){
   const html =
 '<!DOCTYPE html>\n<html lang="ru">\n<head>\n<meta charset="utf-8">\n'+
 '<meta name="viewport" content="width=device-width, initial-scale=1">\n'+
-'<title>'+esc(name)+' — '+esc(CATS[cat])+', '+esc(city)+' | KÁSIP.kz</title>\n'+
+'<title>'+esc(name)+' — '+esc(CATS[cat])+', '+esc(city)+' | Zerta.kz</title>\n'+
 '<meta name="description" content="'+esc(short)+'">\n'+
 '<link rel="canonical" href="'+SITE+'/biz/'+slug+'.html">\n'+
 '<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">\n'+
@@ -263,7 +263,7 @@ function build(){
 '@media(max-width:880px){.cols{grid-template-columns:1fr;gap:30px}.side{position:static}}\n'+
 ':focus-visible{outline:2.5px solid var(--jade);outline-offset:3px}\n'+
 '</style>\n</head>\n<body>\n\n'+
-'<nav class="nav"><div class="wrap nav-in">\n  <a class="logo" href="../index.html">KÁSIP<span>.kz</span></a>\n'+
+'<nav class="nav"><div class="wrap nav-in">\n  <a class="logo" href="../index.html">Zerta<span>.kz</span></a>\n'+
 '  <a class="btn btn-ghost" href="../index.html#add">Разместить бизнес</a>\n</div></nav>\n\n'+
 '<div class="wrap"><div class="crumbs">\n  <a href="../index.html">Каталог</a> <span>/</span>\n'+
 '  <a href="../index.html#catalog">'+esc(CATS[cat])+'</a> <span>/</span>\n  <span>'+esc(city)+'</span> <span>/</span>\n  <span>'+esc(name)+'</span>\n</div></div>\n\n'+
@@ -273,7 +273,7 @@ function build(){
 (paras?'    <section class="block">\n      <h2>Чем занимается</h2>\n'+paras+'\n    </section>\n\n':'')+
 (rows?'    <section class="block">\n      <h2>Услуги и цены</h2>\n      <div class="prices">\n'+rows+'\n      </div>\n    </section>\n\n':'')+
 (mapBlock?mapBlock+'\n\n':'')+
-'    <div class="disclaimer">\n      KÁSIP.kz — информационный каталог. Мы не продаём товары и услуги размещённых компаний и не являемся стороной сделок.\n'+
+'    <div class="disclaimer">\n      Zerta.kz — информационный каталог. Мы не продаём товары и услуги размещённых компаний и не являемся стороной сделок.\n'+
 '      Значок подтверждает регистрацию бизнеса, а не качество его работы. Подробности — в <a href="../terms.html">Правилах размещения</a>.\n    </div>\n  </div>\n\n'+
 '  <aside class="side">\n    <div class="panel dark">\n      <h3>Связаться</h3>\n'+
 (wa?'      <a class="btn btn-wa" href="'+wa+'" target="_blank" rel="noopener">Написать в WhatsApp</a>\n':'')+
@@ -282,7 +282,7 @@ function build(){
 '        <div class="kv"><span>Город</span><b>'+esc(city)+'</b></div>\n'+
 '        <div class="kv"><span>Формат</span><b>'+esc(MODES[mode])+'</b></div>\n      </div>\n    </div>\n\n'+
 '  </aside>\n</main>\n\n'+
-'<div class="wrap"><footer>\n  <span>ИП «Б.А.С.Т.А. PAY GROUP»<br>KÁSIP.kz — каталог бизнесов Казахстана</span>\n'+
+'<div class="wrap"><footer>\n  <span>ИП «Б.А.С.Т.А. PAY GROUP»<br>Zerta.kz — каталог бизнесов Казахстана</span>\n'+
 '  <span><a href="../privacy.html">Политика конфиденциальности</a> · <a href="../terms.html">Правила размещения</a></span>\n</footer></div>\n\n'+
 '<script type="application/ld+json">\n'+ld+'\n<\/script>\n</body>\n</html>\n';
 

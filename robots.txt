@@ -3,4 +3,4 @@ Allow: /
 Disallow: /privacy.html
 Disallow: /terms.html
 
-Sitemap: https://kasip.vercel.app/sitemap.xml
+Sitemap: https://zerta.vercel.app/sitemap.xml
